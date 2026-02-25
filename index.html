@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="sr" class="scroll-smooth scroll-pt-24">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sinapis | Terapeut & Savetnik</title>
+  <link rel="shortcut icon" href="icon.png" type="image/x-icon">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: '#dfe2e3',
+            primary: '#fdce0f',
+            dark: '#1a1a1a'
+          },
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 7px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #dfe2e3;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #fdce0f;
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #e5b90d;
+  }
+    body {
+      background-color: #dfe2e3;
+      scroll-behavior: smooth;
+    }
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    .modal-hidden {
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+    .modal-visible {
+      opacity: 1;
+      pointer-events: auto;
+      transition: all 0.3s ease;
+    }
+    .uplatnica-bg {
+      background-color: #fffdfd;
+      border: 1px solid #dc2626;
+    }
+    .uplatnica-linija {
+      border-bottom: 1px solid #fca5a5;
+    }
+    /* Sklanja strelice kod input type="number" */
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="text-gray-800 antialiased">
+
+  <!-- Navigacija -->
+  <nav class="fixed w-full z-40 glass-panel shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <div class="flex-shrink-0 flex items-center gap-2 sm:gap-3">
+          <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-dark font-bold text-xl">
+            <img src="icon.png" alt="Logo" class="w-full h-full object-contain">
+          </div>
+          <span class="font-bold text-lg sm:text-xl text-dark">Sinapis</span>
+        </div>
+        <div class="hidden md:flex space-x-8">
+          <a href="#pocetna" class="text-dark hover:text-primary font-semibold transition">Početna</a>
+          <a href="#o-meni" class="text-dark hover:text-primary font-semibold transition">O meni</a>
+          <a href="#programi" class="text-dark hover:text-primary font-semibold transition">Programi</a>
+          <a href="#kontakt" class="text-dark hover:text-primary font-semibold transition">Kontakt</a>
+        </div>
+        <div class="flex items-center">
+          <a href="https://www.instagram.com/certicivan/" target="_blank"
+            class="bg-dark text-primary px-4 py-2 sm:px-5 sm:py-2 rounded-full font-bold hover:bg-gray-800 transition flex items-center gap-2 text-sm sm:text-base">
+            <i data-lucide="instagram" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+            <span class="sm:inline">Instagram</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Sekcija -->
+  <section id="pocetna" class="pt-28 md:pt-32 pb-12 md:pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12">
+    <div class="flex-1 space-y-6 text-center md:text-left">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-dark">
+        Oslobodite se bola i vratite <span class="text-primary bg-dark px-2 rounded-lg inline-block mt-2">pokretljivost</span>
+      </h1>
+      <p class="text-base sm:text-lg text-gray-700 max-w-lg mx-auto md:mx-0">
+        Specijalizovani programi vežbi i terapija prilagođeni vašem telu. Rešite probleme sa leđima, kolenima i zglobovima uz stručno vođstvo.
+      </p>
+      <div class="flex justify-center md:justify-start gap-4 pt-2 md:pt-4">
+        <a href="#programi" class="bg-primary text-dark px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-base md:text-lg hover:bg-yellow-400 transition shadow-lg inline-block text-center w-full sm:w-auto">
+          Pogledaj programe
+        </a>
+      </div>
+    </div>
+    <div class="flex-1 relative w-full">
+      <div class="absolute inset-0 bg-primary rounded-full blur-3xl opacity-30"></div>
+      <img src="slika.jpg" alt="Terapija" class="relative z-10 rounded-3xl shadow-2xl object-cover h-[350px] sm:h-[450px] md:h-[550px] w-full border-4 border-white">
+    </div>
+  </section>
+
+  <!-- Instagram Banner CTA -->
+  <div class="bg-primary text-dark py-6 shadow-md my-8 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between relative z-10 text-center md:text-left">
+      <div class="flex flex-col md:flex-row items-center gap-3 md:gap-4 mb-4 md:mb-0">
+        <i data-lucide="help-circle" class="w-8 h-8 md:w-10 md:h-10"></i>
+        <div>
+          <h3 class="text-xl md:text-2xl font-bold">Niste sigurni koji program Vam je potreban?</h3>
+          <p class="font-medium mt-1 text-sm md:text-base">Slobodno mi pošaljite poruku za besplatnu konsultaciju.</p>
+        </div>
+      </div>
+      <a href="https://ig.me/m/certicivan" target="_blank"
+        class="bg-dark text-white px-6 md:px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition shadow-lg whitespace-nowrap w-full sm:w-auto">
+        Pišite mi na Instagram
+      </a>
+    </div>
+  </div>
+
+  <!-- O meni -->
+  <section id="o-meni" class="py-12 md:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div class="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row">
+      <!-- Leva strana (cela ispunjena slikom) -->
+      <div class="md:w-2/5 lg:w-1/3 m-0 p-0 relative min-h-[300px] sm:min-h-[400px] md:min-h-[500px]">
+        <img src="slika.webp" alt="Sinapis Terapeut" class="absolute inset-0 w-full h-full object-cover">
+      </div>
+      <!-- Desna strana (tekst) -->
+      <div class="md:w-3/5 lg:w-2/3 p-6 sm:p-8 md:p-12 flex flex-col justify-center">
+        <h2 class="text-xs sm:text-sm font-bold tracking-widest text-primary uppercase mb-2 text-center md:text-left">Upoznajte fizioterapeut-a</h2>
+        <h3 class="text-2xl sm:text-3xl font-bold text-dark mb-4 md:mb-6 text-center md:text-left">Ivan Ćertić</h3>
+        <p class="text-gray-600 mb-6 leading-relaxed text-sm sm:text-base">Ja sam Ivan Ćertić, fizioterapeut. Bavim se i teologijom jer verujem da se čovek ne može razumeti samo kroz mišić, zglob, način razmišljanja ili kretanja.
+<br><br>
+        Moj rad se zasniva na savremenim medicinskim saznanjima i principima integrativne medicine, kao pristupu koji povezuje znanje o telu, načinu života i celokupnom funkcionisanju čoveka.
+<br><br>
+        Ne lečim simptom, tražim uzrok.
+<br><br>
+        Svaku osobu posmatram kao celinu, njen život, navike, odnose, način kretanja, način razmišljanja. Tegoba ne nastaje izolovano, ona je posledica. Ne verujem u brza i univerzalna rešenja. Ako se život ne promeni, ni telo se neće trajno promeniti. Terapija bez promene obrasca je privremena. Bol, nerv i kičma nisu kvarovi. Oni su signal. Informacija. Odraz načina na koji živimo.
+<br><br>
+        Moj cilj je da razvijem pristup koji je univerzalan po principu, ali individualan u primeni, pravac koji u jednom terminu sagledava čoveka u celosti i povezuje strukturu, funkciju i život u jednu smislenu celinu.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
+          <div class="flex items-center gap-2 text-dark font-semibold text-sm sm:text-base">
+            <i data-lucide="check-circle" class="text-primary w-5 h-5"></i>
+            Stručni pristup
+          </div>
+          <div class="flex items-center gap-2 text-dark font-semibold text-sm sm:text-base">
+            <i data-lucide="check-circle" class="text-primary w-5 h-5"></i>
+            Dokazani rezultati
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programi -->
+  <section id="programi" class="py-12 md:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div class="text-center mb-8 md:mb-12">
+      <h2 class="text-3xl sm:text-4xl font-bold text-dark mb-3 md:mb-4">Pronađite svoj program</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto text-base sm:text-lg px-2">Izaberite deo tela koji vam pravi problem kako bismo vam ponudili najbolje rešenje.</p>
+    </div>
+
+    <!-- Glavne kategorije -->
+    <div id="step-1-categories" class="mb-8">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6 w-full">
+        <!-- Ruka -->
+        <div onclick="showSubCategories('ruka')" class="bg-white rounded-2xl md:rounded-3xl shadow-xl p-4 sm:p-6 md:p-8 text-center cursor-pointer hover:-translate-y-2 hover:shadow-2xl transition border-2 border-transparent hover:border-primary flex flex-col items-center justify-center">
+          <div class="w-12 h-12 md:w-16 md:h-16 bg-gray-100 rounded-full flex items-center justify-center mb-3 md:mb-4 text-dark">
+            <i data-lucide="hand" class="w-6 h-6 md:w-8 md:h-8"></i>
+          </div>
+          <h3 class="font-bold text-lg md:text-xl text-dark">Ruka</h3>
+        </div>
+        <!-- Rame -->
+        <div onclick="showSubCategories('rame')" class="bg-white rounded-2xl md:rounded-3xl shadow-xl p-4 sm:p-6 md:p-8 text-center cursor-pointer hover:-translate-y-2 hover:shadow-2xl transition border-2 border-transparent hover:border-primary flex flex-col items-center justify-center">
+          <div class="w-12 h-12 md:w-16 md:h-16 bg-gray-100 rounded-full flex items-center justify-center mb-3 md:mb-4 text-dark">
+            <i data-lucide="activity" class="w-6 h-6 md:w-8 md:h-8"></i>
+          </div>
+          <h3 class="font-bold text-lg md:text-xl text-dark">Rame</h3>
+        </div>
+        <!-- Noge -->
+        <div onclick="showSubCategories('noge')" class="bg-white rounded-2xl md:rounded-3xl shadow-xl p-4 sm:p-6 md:p-8 text-center cursor-pointer hover:-translate-y-2 hover:shadow-2xl transition border-2 border-transparent hover:border-primary flex flex-col items-center justify-center">
+          <div class="w-12 h-12 md:w-16 md:h-16 bg-gray-100 rounded-full flex items-center justify-center mb-3 md:mb-4 text-dark">
+            <i data-lucide="footprints" class="w-6 h-6 md:w-8 md:h-8"></i>
+          </div>
+          <h3 class="font-bold text-lg md:text-xl text-dark">Noge</h3>
+        </div>
+        <!-- Koleno -->
+        <div onclick="showSubCategories('koleno')" class="bg-white rounded-2xl md:rounded-3xl shadow-xl p-4 sm:p-6 md:p-8 text-center cursor-pointer hover:-translate-y-2 hover:shadow-2xl transition border-2 border-transparent hover:border-primary flex flex-col items-center justify-center">
+          <div class="w-12 h-12 md:w-16 md:h-16 bg-gray-100 rounded-full flex items-center justify-center mb-3 md:mb-4 text-dark">
+            <i data-lucide="circle-dashed" class="w-6 h-6 md:w-8 md:h-8"></i>
+          </div>
+          <h3 class="font-bold text-lg md:text-xl text-dark">Koleno</h3>
+        </div>
+        <!-- Vrat -->
+        <div onclick="showSubCategories('vrat')" class="bg-white rounded-2xl md:rounded-3xl shadow-xl p-4 sm:p-6 md:p-8 text-center cursor-pointer hover:-translate-y-2 hover:shadow-2xl transition border-2 border-transparent hover:border-primary flex flex-col items-center justify-center">
+          <div class="w-12 h-12 md:w-16 md:h-16 bg-gray-100 rounded-full flex items-center justify-center mb-3 md:mb-4 text-dark">
+            <i data-lucide="user" class="w-6 h-6 md:w-8 md:h-8"></i>
+          </div>
+          <h3 class="font-bold text-lg md:text-xl text-dark">Vrat</h3>
+        </div>
+        <!-- Glava -->
+        <div onclick="showSubCategories('glava')" class="bg-white rounded-2xl md:rounded-3xl shadow-xl p-4 sm:p-6 md:p-8 text-center cursor-pointer hover:-translate-y-2 hover:shadow-2xl transition border-2 border-transparent hover:border-primary flex flex-col items-center justify-center">
+          <div class="w-12 h-12 md:w-16 md:h-16 bg-gray-100 rounded-full flex items-center justify-center mb-3 md:mb-4 text-dark">
+            <i data-lucide="smile" class="w-6 h-6 md:w-8 md:h-8"></i>
+          </div>
+          <h3 class="font-bold text-lg md:text-xl text-dark">Glava</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prikaz svih programa za odabranu kategoriju -->
+    <div id="step-2-subcategories" class="hidden w-full text-center mb-8">
+      <button onclick="backToCategories()" class="mb-6 md:mb-8 flex items-center justify-center gap-2 mx-auto text-gray-500 hover:text-dark font-semibold transition text-sm md:text-base">
+        <i data-lucide="arrow-left" class="w-4 h-4 md:w-5 md:h-5"></i> Nazad na izbor tela
+      </button>
+      
+      <div id="subcat-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 justify-center w-full">
+        <!-- Kartice se ubacuju iz JavaScripta -->
+      </div>
+    </div>
+
+    <!-- Imam kod dugme postavljeno nezavisno od kategorija tako da se uvek vidi -->
+    <div class="flex justify-center mt-8 md:mt-12 w-full" id="imam-kod-container">
+      <button onclick="openAccessModal()" class="bg-dark text-white px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-base md:text-lg hover:bg-gray-800 transition shadow-lg flex items-center justify-center gap-2 w-full sm:w-auto">
+        <i data-lucide="lock" class="w-5 h-5"></i> Imam kod
+      </button>
+    </div>
+
+  </section>
+
+  <!-- Kontakt Sekcija -->
+  <section id="kontakt" class="py-12 md:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div class="bg-white rounded-3xl shadow-xl p-6 md:p-10 lg:p-16 relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-48 h-48 md:w-64 md:h-64 bg-primary opacity-10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+      <h2 class="text-3xl md:text-4xl font-bold text-dark mb-8 md:mb-12 text-center relative z-10">Kontaktirajte me</h2>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 relative z-10">
+        <a href="mailto:kontakt@sinapis.rs" class="flex flex-col items-center gap-3 md:gap-4 group">
+          <div class="w-14 h-14 md:w-16 md:h-16 bg-gray-50 rounded-full flex items-center justify-center group-hover:bg-primary transition duration-300 shadow">
+            <i data-lucide="mail" class="w-6 h-6 md:w-8 md:h-8 text-dark"></i>
+          </div>
+          <div class="text-center">
+            <h3 class="font-bold text-lg md:text-xl mb-1">Email adresa</h3>
+            <p class="text-gray-600 font-medium text-sm md:text-base break-all">kontakt@sinapis.rs</p>
+          </div>
+        </a>      
+        <a href="https://ig.me/m/certicivan" target="_blank" class="flex flex-col items-center gap-3 md:gap-4 group">
+          <div class="w-14 h-14 md:w-16 md:h-16 bg-gray-50 rounded-full flex items-center justify-center group-hover:bg-primary transition duration-300 shadow">
+            <i data-lucide="instagram" class="w-6 h-6 md:w-8 md:h-8 text-dark"></i>
+          </div>
+          <div class="text-center">
+            <h3 class="font-bold text-lg md:text-xl mb-1">Instagram</h3>
+            <p class="text-gray-600 font-medium text-sm md:text-base">@certicivan</p>
+          </div>
+        </a>
+        <a href="https://tiktok.com/@certicivan" target="_blank" class="flex flex-col items-center gap-3 md:gap-4 group sm:col-span-2 md:col-span-1">
+          <div class="w-14 h-14 md:w-16 md:h-16 bg-gray-50 rounded-full flex items-center justify-center group-hover:bg-primary transition duration-300 shadow">
+            <svg class="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/></svg>
+          </div>
+          <div class="text-center">
+            <h3 class="font-bold text-lg md:text-xl mb-1">Tiktok</h3>
+            <p class="text-gray-600 font-medium text-sm md:text-base">@certicivan</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white pt-12 md:pt-16 pb-8 text-center rounded-t-3xl mt-12 px-4">
+    <div class="w-14 h-14 md:w-16 md:h-16 rounded-full mx-auto mb-4 md:mb-6 flex items-center justify-center text-dark font-bold text-2xl">
+      <img src="icon.png" alt="Logo" class="w-full h-full object-contain">
+    </div>
+    <h2 class="text-xl md:text-2xl font-bold mb-4 md:mb-6">Sinapis</h2>
+    <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-6">
+      <a href="https://ig.me/m/certicivan" target="_blank" class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-dark transition">
+        <i data-lucide="instagram" class="w-5 h-5 md:w-6 md:h-6"></i>
+      </a>
+      <a href="https://tiktok.com/@certicivan" target="_blank" class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-dark transition">
+      <svg class="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/></svg>
+      </a>
+      <a href="https://facebook.com/certic.ivan" target="_blank" class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-dark transition">
+        <i data-lucide="facebook" class="w-5 h-5 md:w-6 md:h-6"></i>
+      </a>      
+      <a href="mailto:kontakt@sinapis.rs" target="_blank" class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-dark transition">
+        <i data-lucide="mail" class="w-5 h-5 md:w-6 md:h-6"></i>
+      </a>
+    </div>
+    <p class="text-gray-500 text-xs md:text-sm mb-1">&copy; Sva prava zadržana 2026.</p>
+    <p class="text-gray-500 text-xs md:text-sm">Napravio <a href="https://milanwebportal.com" class="hover:text-white transition">milanwebportal.com</a></p>
+
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-primary text-dark p-4 rounded-full shadow-lg opacity-0 pointer-events-none transition-all duration-300 z-50">
+    <i data-lucide="arrow-up"></i>
+  </button>
+  </footer>
+  
+  <!-- MODALI -->
+
+  <!-- Modal 1: Forma za poručivanje -->
+  <div id="orderFormModal" class="fixed inset-0 z-50 flex items-center justify-center modal-hidden">
+    <div class="absolute inset-0 bg-dark opacity-60 backdrop-blur-sm" onclick="closeModal('orderFormModal')"></div>
+    <div class="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full mx-4 relative z-10 shadow-2xl max-h-[90vh] overflow-y-auto">
+      <button onclick="closeModal('orderFormModal')" class="absolute top-4 right-4 text-gray-500 hover:text-dark p-1">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+      <h3 class="text-xl md:text-2xl font-bold text-dark mb-2 mt-2 md:mt-0">Detalji porudžbine</h3>
+      <p class="text-gray-600 mb-6 text-xs md:text-sm">Unesite vaše podatke kako bismo evidentirali vašu uplatu i poslali vam kod.</p>
+
+      <form id="purchaseForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs md:text-sm font-semibold text-gray-700 mb-1">Ime</label>
+            <input type="text" id="buyerFirstName" placeholder="Unesite ime" required class="w-full border-2 border-gray-200 rounded-xl px-4 py-2.5 md:py-3 text-sm md:text-base focus:border-primary focus:outline-none transition">
+          </div>
+          <div>
+            <label class="block text-xs md:text-sm font-semibold text-gray-700 mb-1">Prezime</label>
+            <input type="text" id="buyerLastName" placeholder="Unesite prezime" required class="w-full border-2 border-gray-200 rounded-xl px-4 py-2.5 md:py-3 text-sm md:text-base focus:border-primary focus:outline-none transition">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs md:text-sm font-semibold text-gray-700 mb-1">Email adresa</label>
+          <input type="email" id="buyerEmail" placeholder="Unesite email adresu" required class="w-full border-2 border-gray-200 rounded-xl px-4 py-2.5 md:py-3 text-sm md:text-base focus:border-primary focus:outline-none transition">
+        </div>
+        <div>
+          <label class="block text-xs md:text-sm font-semibold text-gray-700 mb-1">Broj telefona</label>
+          <input type="number" id="buyerPhone" placeholder="Unesite broj telefona" required pattern="[0-9]*" class="w-full border-2 border-gray-200 rounded-xl px-4 py-2.5 md:py-3 text-sm md:text-base focus:border-primary focus:outline-none transition">
+        </div>
+
+        <div class="flex items-start gap-2 pt-2" style="align-items: center;">
+          <input type="checkbox" id="privacyPolicy" required class="w-4 h-4 text-primary focus:ring-primary border-gray-300 rounded cursor-pointer mt-0.5">
+          <label for="privacyPolicy" class="text-xs text-gray-600 font-medium cursor-pointer leading-tight">Slažem se sa <button type="button" onclick="openModal('privacyModal')" class="text-primary underline hover:text-yellow-600">politikom privatnosti</button> i <button type="button" onclick="openModal('refundModal')" class="text-primary underline hover:text-yellow-600">refund policy</button>.
+          </label>
+        </div>
+        
+        <button type="submit" id="submitBtn" class="w-full bg-dark text-white font-bold py-3 md:py-3.5 rounded-xl hover:bg-gray-800 transition shadow mt-4 flex justify-center items-center gap-2 text-sm md:text-base">
+          Potvrdi i prikaži uplatnicu
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Politike -->
+  <div id="privacyModal" class="fixed inset-0 z-[60] flex items-center justify-center modal-hidden">
+    <div class="absolute inset-0 bg-dark opacity-60 backdrop-blur-sm" onclick="closeModal('privacyModal')"></div>
+    <div class="bg-white rounded-3xl p-6 md:p-8 max-w-lg w-full mx-4 relative z-10 shadow-2xl max-h-[85vh] flex flex-col">
+      <button onclick="closeModal('privacyModal')" class="absolute top-4 right-4 text-gray-500 hover:text-dark p-1">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+      <h3 class="text-xl md:text-2xl font-bold text-dark mb-4 mt-2 md:mt-0">Politika privatnosti</h3>
+      <div class="overflow-y-auto pr-2 text-xs md:text-sm text-gray-600 space-y-3 md:space-y-4 flex-grow">
+        <p>Ova Politika privatnosti objašnjava kako prikupljamo, koristimo i štitimo vaše lične podatke.</p>
+        <p><strong>1. Prikupljanje podataka</strong><br>
+        Prikupljamo osnovne podatke kao što su ime, prezime, email adresa i broj telefona isključivo u svrhu realizacije kupovine, slanja kodova za programe i komunikacije sa vama.</p>
+        <p><strong>2. Korišćenje podataka</strong><br>
+        Vaši podaci se koriste samo za obradu vaše porudžbine i tehničku podršku (putem emaila ili Instagrama). Nećemo koristiti vaše podatke za slanje marketinških poruka bez vašeg izričitog pristanka.</p>
+        <p><strong>3. Zaštita podataka</strong><br>
+        Preduzimamo sve razumne mere za zaštitu vaših ličnih podataka od neovlašćenog pristupa, gubitka ili zloupotrebe.</p>
+        <p><strong>4. Deljenje podataka</strong><br>
+        Vaše podatke ne delimo, ne prodajemo niti iznajmljujemo trećim licima.</p>
+        <p>Nastavkom korišćenja ovog sajta i popunjavanjem forme pristajete na našu politiku obrade podataka.</p>
+      </div>
+      <button onclick="closeModal('privacyModal')" class="w-full bg-primary text-dark font-bold py-3 rounded-xl hover:bg-yellow-400 transition shadow mt-4 md:mt-6 text-sm md:text-base">
+        Razumem i zatvori
+      </button>
+    </div>
+  </div>
+
+  <div id="refundModal" class="fixed inset-0 z-[60] flex items-center justify-center modal-hidden">
+  <div class="absolute inset-0 bg-dark opacity-60 backdrop-blur-sm" onclick="closeModal('refundModal')"></div>
+  <div class="bg-white rounded-3xl p-6 md:p-8 max-w-lg w-full mx-4 relative z-10 shadow-2xl max-h-[85vh] flex flex-col">
+    <button onclick="closeModal('refundModal')" class="absolute top-4 right-4 text-gray-500 hover:text-dark p-1">
+      <i data-lucide="x" class="w-6 h-6"></i>
+    </button>
+    <h3 class="text-xl md:text-2xl font-bold text-dark mb-4 mt-2 md:mt-0">Politika povraćaja novca</h3>
+    <div class="overflow-y-auto pr-2 text-xs md:text-sm text-gray-600 space-y-3 md:space-y-4 flex-grow">
+      <p>Za sve digitalne programe i materijale kupljene putem našeg sajta povraćaj novca nije moguć.</p>
+      <p>S obzirom na prirodu digitalnog edukativnog sadržaja koji postaje dostupan odmah nakon kupovine ne nudimo opciju refundacije.</p>
+    </div>
+    <button onclick="closeModal('refundModal')" class="w-full bg-primary text-dark font-bold py-3 rounded-xl hover:bg-yellow-400 transition shadow mt-4 md:mt-6 text-sm md:text-base">
+      Razumem i zatvori
+    </button>
+  </div>
+</div>
+
+  <!-- Modal 2: Instrukcije za plaćanje i Uplatnica -->
+  <div id="paymentModal" class="fixed inset-0 z-50 flex items-center justify-center modal-hidden">
+    <div class="absolute inset-0 bg-dark opacity-60 backdrop-blur-sm" onclick="closeModal('paymentModal')"></div>
+    <div class="bg-white rounded-3xl p-5 sm:p-6 md:p-8 max-w-2xl w-full mx-4 relative z-10 shadow-2xl overflow-y-auto max-h-[90vh]">
+      <button onclick="closeModal('paymentModal')" class="absolute top-3 right-3 md:top-4 md:right-4 text-gray-500 hover:text-dark p-1 bg-white rounded-full shadow-sm md:shadow-none z-20">
+        <i data-lucide="x" class="w-5 h-5 md:w-6 md:h-6"></i>
+      </button>
+      <h3 class="text-xl md:text-2xl font-bold text-dark mb-2 mt-4 md:mt-0 pr-8">Instrukcije za plaćanje</h3>
+      <p class="text-gray-600 mb-4 md:mb-6 font-medium text-xs md:text-sm">Uspešno poslato. Molimo vas da izvršite uplatu prema dole navedenom primeru ili putem PayPal-a.</p>
+
+      <!-- Vizuelna Uplatnica -->
+      <div class="uplatnica-bg p-3 sm:p-4 md:p-6 mb-5 md:mb-6 shadow-sm overflow-x-auto">
+        <div class="text-red-700 font-bold border-b-2 border-red-200 pb-2 mb-3 md:mb-4 text-sm md:text-lg tracking-widest min-w-[280px]">NALOG ZA UPLATU</div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 font-mono text-xs sm:text-sm text-dark min-w-[280px]">
+          
+          <div class="space-y-3 md:space-y-4">
+            <div>
+              <div class="text-[10px] md:text-xs text-red-600 font-sans font-bold uppercase mb-1">Uplatilac</div>
+              <div class="uplatnica-linija pb-1 font-semibold truncate" id="uplIme">Ime i prezime kupca</div>
+            </div>
+            <div>
+              <div class="text-[10px] md:text-xs text-red-600 font-sans font-bold uppercase mb-1">Svrha uplate</div>
+              <div class="uplatnica-linija pb-1 font-semibold truncate" id="uplSvrha">Program terapije</div>
+            </div>
+            <div>
+              <div class="text-[10px] md:text-xs text-red-600 font-sans font-bold uppercase mb-1">Primalac</div>
+              <div class="uplatnica-linija pb-1 font-semibold truncate">Sinapis, Beograd</div>
+            </div>
+          </div>
+
+          <div class="space-y-3 md:space-y-4">
+            <div class="flex gap-2 sm:gap-4">
+              <div class="w-1/4">
+                <div class="text-[10px] md:text-xs text-red-600 font-sans font-bold uppercase mb-1">Šifra</div>
+                <div class="uplatnica-linija pb-1 text-center font-semibold">289</div>
+              </div>
+              <div class="w-1/4">
+                <div class="text-[10px] md:text-xs text-red-600 font-sans font-bold uppercase mb-1">Valuta</div>
+                <div class="uplatnica-linija pb-1 text-center font-semibold">EUR</div>
+              </div>
+              <div class="w-1/2">
+                <div class="text-[10px] md:text-xs text-red-600 font-sans font-bold uppercase mb-1">Iznos</div>
+                <div class="uplatnica-linija pb-1 text-right font-bold text-sm md:text-lg">8.99</div>
+              </div>
+            </div>
+            <div>
+              <div class="text-[10px] md:text-xs text-red-600 font-sans font-bold uppercase mb-1">Račun primaoca</div>
+              <div class="uplatnica-linija pb-1 font-bold tracking-wider text-[11px] sm:text-sm">160-1234567890123-45</div>
+            </div>
+            <div>
+              <div class="text-[10px] md:text-xs text-red-600 font-sans font-bold uppercase mb-1">Poziv na broj (Vaš telefon)</div>
+              <div class="uplatnica-linija pb-1 font-semibold truncate" id="uplPoziv">060000000</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PayPal Sekcija -->
+      <div class="mb-5 md:mb-6 flex flex-col gap-3">
+        <div class="relative flex items-center py-1 md:py-2">
+          <div class="flex-grow border-t border-gray-300"></div>
+          <span class="flex-shrink-0 mx-4 text-gray-500 font-medium text-xs md:text-sm">ILI</span>
+          <div class="flex-grow border-t border-gray-300"></div>
+        </div>
+        <a href="https://streamlabs.com/Milan_567/tip" target="_blank" class="w-full bg-[#00457C] text-white font-bold py-3 md:py-3.5 rounded-xl hover:bg-[#005f9e] transition shadow flex items-center justify-center gap-2 md:gap-3 text-sm md:text-base">
+          <svg viewBox="0 0 24 24" class="w-5 h-5 md:w-6 md:h-6 fill-current"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a2.008 2.008 0 0 0-1.981 1.697l-.715 4.506h4.606a.641.641 0 0 0 .633-.541l.89-5.637a.641.641 0 0 1 .633-.541h.41c3.834 0 6.675-1.572 7.56-5.895.2-1.03.118-1.543-.06-2.503z"/></svg>
+          Plati preko PayPal-a
+        </a>
+      </div>
+
+      <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-3 md:p-4 mb-5 md:mb-6">
+        <p class="text-xs md:text-sm text-yellow-800 font-medium flex items-start gap-2">
+          <i data-lucide="info" class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0 mt-0.5 md:mt-0"></i>
+          Nakon uplate pošaljite sliku uplatnice ili potvrdu o PayPal uplati u poruci na Instagram da bismo vam brže odobrili pristupni kod.
+        </p>
+      </div>
+
+      <a href="https://ig.me/m/certicivan" target="_blank" class="block w-full text-center bg-primary text-dark font-bold py-3 rounded-xl hover:bg-yellow-400 transition shadow text-sm md:text-base">
+        Otvori Instagram
+      </a>
+    </div>
+  </div>
+
+  <!-- Modal za Unos Koda -->
+  <div id="accessModal" class="fixed inset-0 z-50 flex items-center justify-center modal-hidden">
+    <div class="absolute inset-0 bg-dark opacity-60 backdrop-blur-sm" onclick="closeModal('accessModal')"></div>
+    <div class="bg-white rounded-3xl p-6 md:p-8 max-w-sm w-full mx-4 relative z-10 shadow-2xl text-center">
+      <button onclick="closeModal('accessModal')" class="absolute top-4 right-4 text-gray-500 hover:text-dark p-1">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+      <div class="w-14 h-14 md:w-16 md:h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4 text-dark">
+        <i data-lucide="lock" class="w-6 h-6 md:w-8 md:h-8"></i>
+      </div>
+      <h3 class="text-xl md:text-2xl font-bold text-dark mb-2">Pristup programu</h3>
+      <p class="text-gray-600 mb-5 md:mb-6 text-xs md:text-sm">Unesite kod koji ste dobili u poruci kako biste otključali video materijal.</p>
+
+      <input type="text" id="videoCodeInput" placeholder="Vaš kod" class="w-full border-2 border-gray-200 rounded-xl px-4 py-2.5 md:py-3 mb-2 text-center font-mono font-bold text-base md:text-lg focus:border-primary focus:outline-none transition uppercase">
+
+      <div id="errorMessage" class="text-red-500 text-xs md:text-sm font-semibold h-5 md:h-6 mb-3 md:mb-4 flex items-center justify-center"></div>
+
+      <button onclick="verifyCode()" class="w-full bg-dark text-white font-bold py-3 rounded-xl hover:bg-gray-800 transition shadow text-sm md:text-base">
+        Otključaj video
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal za Video -->
+  <div id="videoModal" class="fixed inset-0 z-50 flex items-center justify-center modal-hidden">
+    <div class="absolute inset-0 bg-dark opacity-95" onclick="closeVideo()"></div>
+    <div class="w-full max-w-4xl mx-4 relative z-10">
+      <button onclick="closeVideo()" class="absolute -top-10 right-0 text-white flex items-center gap-2 font-bold">Zatvori <i data-lucide="x-circle"></i></button>
+      <div class="bg-black rounded-2xl overflow-hidden aspect-video shadow-2xl">
+        <iframe id="mainVideoFrame" src="" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+<script>
+// 1. INICIJALIZACIJA (Zameni sa svojim podacima)
+    const supabaseUrl = 'https://evmfeikwgxhuewzmlrau.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV2bWZlaWt3Z3hodWV3em1scmF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NDI3MjEsImV4cCI6MjA4NzUxODcyMX0.pBI7AU4xMUP2LpBfpu5tEW2zzYkaG-rLe596mJrtya4';
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+    lucide.createIcons();
+
+    const videoParams = "?modestbranding=1&rel=0&showinfo=0&controls=1&iv_load_policy=3";
+
+    const programsData = {
+      'ruka': [
+        { id: 'r1', name: 'Bol u ruci prednji deo', videoUrl: 'https://www.youtube.com/embed/3MKi40uneUQ' + videoParams, img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80', desc: 'Detaljan video vodič za opuštanje mišića ruke.' },
+        { id: 'r2', name: 'Bol u ruci zadnji deo', videoUrl: 'https://www.youtube.com/embed/5kMUKC4KEfw' + videoParams, img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80', desc: 'Vežbe ciljane za zadnji deo ruke i lakta.' }
+      ],
+      'rame': [
+        { id: 'rm1', name: 'Zglob ramena i rotatori', videoUrl: 'https://www.youtube.com/embed/FIQHhkxmurQ' + videoParams, img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80', desc: 'Vratite pun obim pokreta u zglobu ramena.' }
+      ],
+      'noge': [
+        { id: 'n1', name: 'Oslobađanje išijadičnog nerva', videoUrl: 'https://www.youtube.com/embed/zjQgwAm38c0' + videoParams, img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80', desc: 'Smirite upalu nerva kroz pažljivo odabrane pokrete.' }
+      ],
+      'koleno': [
+        { id: 'k1', name: 'Bol u kolenu hrskavica', videoUrl: 'https://www.youtube.com/embed/mCu6wtNAzZg' + videoParams, img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80', desc: 'Ojačajte mišiće oko kolena za stabilan hod.' }
+      ],
+      'vrat': [
+        { id: 'v1', name: 'Vratni pršljenovi i držanje', videoUrl: 'https://www.youtube.com/embed/zzDf2aPmZFY' + videoParams, img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80', desc: 'Oslobodite se bola u gornjem delu tela i ispravite držanje.' }
+      ],
+      'glava': [
+        { id: 'g1', name: 'Tenzione glavobolje', videoUrl: 'https://www.youtube.com/embed/xHv1_48i5-A' + videoParams, img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80', desc: 'Smanjite tenzione glavobolje masažom tačaka.' }
+      ]
+    };
+
+    let selectedProgramName = '';
+
+    function showSubCategories(categoryId) {
+      document.getElementById('step-1-categories').classList.add('hidden');
+      const subContainer = document.getElementById('subcat-container');
+      subContainer.innerHTML = '';
+      if(programsData[categoryId]) {
+        programsData[categoryId].forEach(prog => {
+          const card = document.createElement('div');
+          card.className = 'bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden flex flex-col text-left';
+          card.innerHTML = `
+            <div class="relative h-48 bg-gray-200">
+              <img src="${prog.img}" alt="${prog.name}" class="w-full h-full object-cover">
+              <div class="absolute top-4 right-4 bg-primary text-dark font-bold px-3 py-1 rounded-full shadow text-sm">8.99 €</div>
+            </div>
+            <div class="p-6 flex flex-col flex-grow">
+              <h3 class="text-xl font-bold text-dark mb-2">${prog.name}</h3>
+              <p class="text-gray-600 mb-6 text-sm flex-grow">${prog.desc}</p>
+              <button onclick="openOrderForm('${prog.name}')" class="w-full bg-dark text-white font-bold py-3 rounded-xl hover:bg-gray-800 transition shadow mt-auto">Kupi program</button>
+            </div>
+          `;
+          subContainer.appendChild(card);
+        });
+      }
+      document.getElementById('step-2-subcategories').classList.remove('hidden');
+    }
+
+    function backToCategories() {
+      document.getElementById('step-2-subcategories').classList.add('hidden');
+      document.getElementById('step-1-categories').classList.remove('hidden');
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.remove('modal-hidden');
+      document.getElementById(id).classList.add('modal-visible');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('modal-visible');
+      document.getElementById(id).classList.add('modal-hidden');
+    }
+
+    function openOrderForm(programName) {
+      selectedProgramName = programName;
+      document.getElementById('purchaseForm').reset();
+      openModal('orderFormModal');
+    }
+
+    function openAccessModal() { openModal('accessModal'); }
+
+    function generisiKod() {
+      const karakteri = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let rezultat = '';
+      for (let i = 0; i < 6; i++) { rezultat += karakteri.charAt(Math.floor(Math.random() * karakteri.length)); }
+      return rezultat;
+    }
+
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      btn.innerText = "Slanje...";
+      btn.disabled = true;
+
+      const ime = document.getElementById('buyerFirstName').value.trim();
+      const prezime = document.getElementById('buyerLastName').value.trim();
+      const email = document.getElementById('buyerEmail').value.trim();
+      const telefon = document.getElementById('buyerPhone').value.trim();
+      const punoIme = ime + " " + prezime;
+
+      const noviKod = generisiKod();
+
+      const { error } = await supabaseClient
+        .from('pristupi')
+        .insert([{ 
+          kod: noviKod, 
+          ime_prezime: punoIme, 
+          telefon: telefon,
+          program_ime: selectedProgramName 
+        }]);
+
+      if (error) {
+        console.error(error);
+        alert("Greska sa bazom. Proveri RLS polise.");
+        btn.disabled = false;
+        btn.innerText = "Potvrdi i prikaži uplatnicu";
+        return;
+      }
+
+      document.getElementById('uplIme').innerText = punoIme;
+      document.getElementById('uplSvrha').innerText = "Program: " + selectedProgramName;
+      document.getElementById('uplPoziv').innerText = noviKod;
+
+      // Generisanje teksta za automatski odgovor kupcu
+      const autoReplyMessage = `Poštovani/a ${punoIme},\n\nPrimili smo Vašu online prijavu za program vežbi.\n\nUpravo ste se prijavili za: ${selectedProgramName}\nCena: 8.99 €\n\nPodaci za uplatu:\nPrimalac: Sinapis, Beograd\nRačun: 160-123456789-45\nPoziv na broj: ${noviKod}\n\nVaša rezervacija važi 7 dana. Odmah nakon uplate, pošaljite potvrdu na naš Instagram profil radi aktivacije koda.\n\nVaš Sinapis tim`;
+
+      fetch("https://formsubmit.co/ajax/tvoj_email@gmail.com", {
+          method: "POST",
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ 
+              Ime: punoIme, 
+              email: email, 
+              Telefon: telefon,
+              Program: selectedProgramName, 
+              Kod: noviKod,
+              _autoresponse: autoReplyMessage,
+              _subject: "Nova narudžbina: " + noviKod
+          })
+      }).finally(() => {
+          btn.innerText = "Potvrdi i prikaži uplatnicu";
+          btn.disabled = false;
+          closeModal('orderFormModal');
+          openModal('paymentModal');
+      });
+    }
+
+    async function verifyCode() {
+      const codeInput = document.getElementById('videoCodeInput').value.trim().toUpperCase();
+      const errorBox = document.getElementById('errorMessage');
+      if (!codeInput) { errorBox.innerText = 'Unesite kod'; return; }
+
+      errorBox.innerText = 'Proveravam...';
+
+      const { data, error } = await supabaseClient
+        .from('pristupi')
+        .select('*')
+        .eq('kod', codeInput)
+        .maybeSingle();
+
+      if (error || !data) { errorBox.innerText = 'Kod ne postoji.'; return; }
+      if (!data.aktivan) { errorBox.innerText = 'Kod još nije aktiviran.'; return; }
+      
+      const sada = new Date();
+      const istice = new Date(data.vazi_do);
+      if (sada > istice) { errorBox.innerText = 'Kod je istekao.'; return; }
+
+      let foundVideo = '';
+      for (const cat in programsData) {
+        const prog = programsData[cat].find(p => p.name === data.program_ime);
+        if (prog) { foundVideo = prog.videoUrl; break; }
+      }
+
+      if (foundVideo) {
+        const videoFrame = document.getElementById('mainVideoFrame');
+        if (videoFrame) {
+            videoFrame.src = foundVideo;
+            errorBox.innerText = '';
+            closeModal('accessModal');
+            openModal('videoModal');
+        } else {
+            console.error("Greska: Element mainVideoFrame nije pronadjen u HTML-u.");
+            errorBox.innerText = 'Sistemska greška: Plejer nije spreman.';
+        }
+      } else {
+        errorBox.innerText = 'Video nije pronadjen.';
+      }
+    }
+
+    function closeVideo() {
+      const videoFrame = document.getElementById('mainVideoFrame');
+      if (videoFrame) videoFrame.src = '';
+      closeModal('videoModal');
+    }
+
+    const backToTopBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTopBtn.classList.replace('opacity-0', 'opacity-100');
+            backToTopBtn.classList.replace('pointer-events-none', 'pointer-events-auto');
+        } else {
+            backToTopBtn.classList.replace('opacity-100', 'opacity-0');
+            backToTopBtn.classList.replace('pointer-events-auto', 'pointer-events-none');
+        }
+    });
+    backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
+</body>
+</html>
