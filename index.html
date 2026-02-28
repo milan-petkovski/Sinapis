@@ -8,6 +8,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://unpkg.com/cloudinary-video-player@1.10.6/dist/cld-video-player.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/cloudinary-video-player@1.10.6/dist/cld-video-player.min.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -520,15 +523,15 @@
   <div id="videoModal" class="fixed inset-0 z-50 flex items-center justify-center modal-hidden">
     <div class="absolute inset-0 bg-dark opacity-95" onclick="closeVideo()"></div>
     <div class="w-full max-w-4xl mx-4 relative z-10">
-      <button onclick="closeVideo()" class="absolute -top-10 right-0 text-white flex items-center gap-2 font-bold">Zatvori <i data-lucide="x-circle"></i></button>
-      <div class="bg-black rounded-2xl overflow-hidden aspect-video shadow-2xl">
-        <iframe id="mainVideoFrame" src="" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <button onclick="closeVideo()" class="absolute -top-10 right-0 text-white flex items-center gap-2 font-bold z-30">Zatvori <i data-lucide="x-circle"></i></button>
+      <div class="bg-black rounded-2xl overflow-hidden aspect-video shadow-2xl relative">
+        <iframe id="mainVideoFrame" src="" class="w-full h-full relative z-10" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
   </div>
 
 <script>
-// 1. INICIJALIZACIJA (Zameni sa svojim podacima)
+  // 1. INICIJALIZACIJA
     const supabaseUrl = 'https://evmfeikwgxhuewzmlrau.supabase.co';
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV2bWZlaWt3Z3hodWV3em1scmF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NDI3MjEsImV4cCI6MjA4NzUxODcyMX0.pBI7AU4xMUP2LpBfpu5tEW2zzYkaG-rLe596mJrtya4';
     const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
@@ -536,10 +539,11 @@
     lucide.createIcons();
 
     const videoParams = "?modestbranding=1&rel=0&showinfo=0&controls=1&iv_load_policy=3";
+    let selectedProgramName = '';
 
     const programsData = {
       'ruka': [
-        { id: 'r1', name: 'Bol u ruci prednji deo', videoUrl: 'testvideo.mp4' + videoParams, img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80', desc: 'Detaljan video vodič za opuštanje mišića ruke.' },
+        { id: 'r1', name: 'Bol u ruci prednji deo', videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=dlrdbb17c&public_id=testvideo_wymjto&player[showLogo]=false&player[floatingWhenNotVisible]=false&player[showJumpControls]=false', img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80', desc: 'Detaljan video vodič za opuštanje mišića ruke.' },
         { id: 'r2', name: 'Bol u ruci zadnji deo', videoUrl: 'https://www.youtube.com/embed/5kMUKC4KEfw' + videoParams, img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80', desc: 'Vežbe ciljane za zadnji deo ruke i lakta.' }
       ],
       'rame': [
@@ -558,8 +562,6 @@
         { id: 'g1', name: 'Tenzione glavobolje', videoUrl: 'https://www.youtube.com/embed/xHv1_48i5-A' + videoParams, img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80', desc: 'Smanjite tenzione glavobolje masažom tačaka.' }
       ]
     };
-
-    let selectedProgramName = '';
 
     function showSubCategories(categoryId) {
       document.getElementById('step-1-categories').classList.add('hidden');
@@ -681,38 +683,47 @@
 
       errorBox.innerText = 'Proveravam...';
 
-      const { data, error } = await supabaseClient
-        .from('pristupi')
-        .select('*')
-        .eq('kod', codeInput)
-        .maybeSingle();
+      try {
+        const { data, error } = await supabaseClient
+          .from('pristupi')
+          .select('*')
+          .eq('kod', codeInput)
+          .maybeSingle();
 
-      if (error || !data) { errorBox.innerText = 'Kod ne postoji.'; return; }
-      if (!data.aktivan) { errorBox.innerText = 'Kod još nije aktiviran.'; return; }
-      
-      const sada = new Date();
-      const istice = new Date(data.vazi_do);
-      if (sada > istice) { errorBox.innerText = 'Kod je istekao.'; return; }
-
-      let foundVideo = '';
-      for (const cat in programsData) {
-        const prog = programsData[cat].find(p => p.name === data.program_ime);
-        if (prog) { foundVideo = prog.videoUrl; break; }
-      }
-
-      if (foundVideo) {
-        const videoFrame = document.getElementById('mainVideoFrame');
-        if (videoFrame) {
-            videoFrame.src = foundVideo;
-            errorBox.innerText = '';
-            closeModal('accessModal');
-            openModal('videoModal');
-        } else {
-            console.error("Greska: Element mainVideoFrame nije pronadjen u HTML-u.");
-            errorBox.innerText = 'Sistemska greška: Plejer nije spreman.';
+        if (error) {
+          console.error("Greska sa bazom:", error);
+          errorBox.innerText = 'Greška pri povezivanju sa bazom.';
+          return;
         }
-      } else {
-        errorBox.innerText = 'Video nije pronadjen.';
+
+        if (!data) { errorBox.innerText = 'Kod ne postoji.'; return; }
+        if (!data.aktivan) { errorBox.innerText = 'Kod još nije aktiviran.'; return; }
+        
+        const sada = new Date();
+        const istice = new Date(data.vazi_do);
+        if (sada > istice) { errorBox.innerText = 'Kod je istekao.'; return; }
+
+        let foundVideo = '';
+        for (const cat in programsData) {
+          const prog = programsData[cat].find(p => p.name === data.program_ime);
+          if (prog) { foundVideo = prog.videoUrl; break; }
+        }
+
+        if (foundVideo) {
+          const videoFrame = document.getElementById('mainVideoFrame');
+          if (videoFrame) {
+              videoFrame.src = foundVideo;
+              errorBox.innerText = '';
+              closeModal('accessModal');
+              openModal('videoModal');
+          } else {
+              errorBox.innerText = 'Sistemska greška: Plejer nije spreman.';
+          }
+        } else {
+          errorBox.innerText = 'Video nije pronadjen.';
+        }
+      } catch (err) {
+        errorBox.innerText = 'Tačna greška: ' + err.message;
       }
     }
 
