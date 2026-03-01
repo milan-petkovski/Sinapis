@@ -57,7 +57,7 @@
 
 <hr>
 
-⚙️ Installation (Local)
+## ⚙️ Installation (Local)
 ```bash
 git clone https://github.com/Milan-petkovski/Sinapis.git
 cd Sinapis
