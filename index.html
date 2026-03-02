@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sinapis | Terapeut & Savetnik</title>
+  <title>Sinapis</title>
   <link rel="shortcut icon" href="icon.png" type="image/x-icon">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -111,42 +111,54 @@
   </nav>
 
   <!-- Hero Sekcija -->
-  <section id="pocetna" class="pt-28 md:pt-32 pb-12 md:pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12">
-    <div class="flex-1 space-y-6 text-center md:text-left">
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-dark">
-        Oslobodite se bola i vratite <span class="text-primary bg-dark px-2 rounded-lg inline-block mt-2">pokretljivost</span>
-      </h1>
-      <p class="text-base sm:text-lg text-gray-700 max-w-lg mx-auto md:mx-0">
-        Specijalizovani programi vežbi i terapija prilagođeni vašem telu. Rešite probleme sa leđima, kolenima i zglobovima uz stručno vođstvo.
-      </p>
-      <div class="flex justify-center md:justify-start gap-4 pt-2 md:pt-4">
-        <a href="#programi" class="bg-primary text-dark px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-base md:text-lg hover:bg-yellow-400 transition shadow-lg inline-block text-center w-full sm:w-auto">
-          Pogledaj programe
+  <section id="pocetna" class="relative pt-32 md:pt-40 overflow-hidden">
+    
+    <div class="absolute top-40 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl -z-10"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16 md:mb-24">
+      <div class="max-w-4xl mx-auto space-y-8">
+        <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-dark leading-[1.1]">
+          Oslobodite se bola i vratite 
+          <br class="hidden md:block">
+          <span class="text-primary bg-dark px-4 py-2 rounded-2xl inline-block mt-4 transform -rotate-1 shadow-lg">
+            pokretljivost
+          </span>
+        </h1>
+
+        <p class="text-lg md:text-2xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          Specijalizovani programi i vežbe za oporavak svakodnevnih povreda, bez trenera/terapeuta. 
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
+          <a href="#programi" class="w-full sm:w-auto bg-primary text-dark px-10 py-5 rounded-full font-bold text-xl hover:bg-yellow-400 transition-all hover:scale-105 shadow-2xl active:scale-95 text-center flex items-center justify-center gap-2">
+            <i data-lucide="search" class="w-5 h-5"></i> Pogledaj programe
+          </a>      
+          <button onclick="openAccessModal()" class="w-full sm:w-auto bg-dark text-white px-10 py-5 rounded-full font-bold text-xl hover:bg-gray-800 transition shadow-lg flex items-center justify-center gap-2">
+            <i data-lucide="unlock" class="w-5 h-5"></i> Imam kod
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full bg-primary text-dark py-8 md:py-10 shadow-inner border-y border-dark/5">
+      <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+        <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6">
+          <div class="bg-dark text-primary p-3 rounded-full hidden sm:block">
+            <i data-lucide="help-circle" class="w-8 h-8"></i>
+          </div>
+          <div>
+            <h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight">Niste sigurni koji program Vam je potreban?</h3>
+            <p class="font-bold mt-1 text-base md:text-lg opacity-80">Slobodno mi pošaljite poruku za besplatnu konsultaciju.</p>
+          </div>
+        </div>
+        <a href="https://ig.me/m/certicivan" target="_blank"
+          class="bg-dark text-white px-10 py-4 rounded-full font-black text-lg hover:bg-gray-800 transition-all hover:scale-105 shadow-xl whitespace-nowrap w-full md:w-auto">
+          PIŠITE MI NA INSTAGRAM
         </a>
       </div>
     </div>
-    <div class="flex-1 relative w-full">
-      <div class="absolute inset-0 bg-primary rounded-full blur-3xl opacity-30"></div>
-      <img src="slika.jpg" alt="Terapija" class="relative z-10 rounded-3xl shadow-2xl object-cover h-[350px] sm:h-[450px] md:h-[550px] w-full border-4 border-white">
-    </div>
-  </section>
 
-  <!-- Instagram Banner CTA -->
-  <div class="bg-primary text-dark py-6 shadow-md my-8 relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between relative z-10 text-center md:text-left">
-      <div class="flex flex-col md:flex-row items-center gap-3 md:gap-4 mb-4 md:mb-0">
-        <i data-lucide="help-circle" class="w-8 h-8 md:w-10 md:h-10"></i>
-        <div>
-          <h3 class="text-xl md:text-2xl font-bold">Niste sigurni koji program Vam je potreban?</h3>
-          <p class="font-medium mt-1 text-sm md:text-base">Slobodno mi pošaljite poruku za besplatnu konsultaciju.</p>
-        </div>
-      </div>
-      <a href="https://ig.me/m/certicivan" target="_blank"
-        class="bg-dark text-white px-6 md:px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition shadow-lg whitespace-nowrap w-full sm:w-auto">
-        Pišite mi na Instagram
-      </a>
-    </div>
-  </div>
+  </section>
 
   <!-- O meni -->
   <section id="o-meni" class="py-12 md:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -157,7 +169,7 @@
       </div>
       <!-- Desna strana (tekst) -->
       <div class="md:w-3/5 lg:w-2/3 p-6 sm:p-8 md:p-12 flex flex-col justify-center">
-        <h2 class="text-xs sm:text-sm font-bold tracking-widest text-primary uppercase mb-2 text-center md:text-left">Upoznajte fizioterapeut-a</h2>
+        <h2 class="text-xs sm:text-sm font-bold tracking-widest text-primary uppercase mb-2 text-center md:text-left">UPOZNAJTE TERAPEUTA</h2>
         <h3 class="text-2xl sm:text-3xl font-bold text-dark mb-4 md:mb-6 text-center md:text-left">Ivan Ćertić</h3>
         <p class="text-gray-600 mb-6 leading-relaxed text-sm sm:text-base">Ja sam Ivan Ćertić, fizioterapeut. Bavim se i teologijom jer verujem da se čovek ne može razumeti samo kroz mišić, zglob, način razmišljanja ili kretanja.
 <br><br>
@@ -169,90 +181,46 @@
 <br><br>
         Moj cilj je da razvijem pristup koji je univerzalan po principu, ali individualan u primeni, pravac koji u jednom terminu sagledava čoveka u celosti i povezuje strukturu, funkciju i život u jednu smislenu celinu.
         </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
-          <div class="flex items-center gap-2 text-dark font-semibold text-sm sm:text-base">
-            <i data-lucide="check-circle" class="text-primary w-5 h-5"></i>
-            Stručni pristup
-          </div>
-          <div class="flex items-center gap-2 text-dark font-semibold text-sm sm:text-base">
-            <i data-lucide="check-circle" class="text-primary w-5 h-5"></i>
-            Dokazani rezultati
-          </div>
-        </div>
       </div>
     </div>
   </section>
 
   <!-- Programi -->
   <section id="programi" class="py-12 md:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-    <div class="text-center mb-8 md:mb-12">
-      <h2 class="text-3xl sm:text-4xl font-bold text-dark mb-3 md:mb-4">Pronađite svoj program</h2>
-      <p class="text-gray-600 max-w-2xl mx-auto text-base sm:text-lg px-2">Izaberite deo tela koji vam pravi problem kako bismo vam ponudili najbolje rešenje.</p>
+    <div class="text-center mb-10 md:mb-16">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">Pronađite svoj program</h2>
+      <p class="text-slate-500 max-w-2xl mx-auto text-base sm:text-lg px-2 leading-relaxed">Izaberite deo tela koji vam pravi problem kako bismo vam ponudili najbolje rešenje.</p>
     </div>
 
-    <!-- Glavne kategorije -->
-    <div id="step-1-categories" class="mb-8">
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6 w-full">
-        <!-- Ruka -->
-        <div onclick="showSubCategories('ruka')" class="bg-white rounded-2xl md:rounded-3xl shadow-xl p-4 sm:p-6 md:p-8 text-center cursor-pointer hover:-translate-y-2 hover:shadow-2xl transition border-2 border-transparent hover:border-primary flex flex-col items-center justify-center">
-          <div class="w-12 h-12 md:w-16 md:h-16 bg-gray-100 rounded-full flex items-center justify-center mb-3 md:mb-4 text-dark">
-            <i data-lucide="hand" class="w-6 h-6 md:w-8 md:h-8"></i>
+    <div id="step-1-categories" class="mb-10">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:max-w-10xl lg:mx-auto gap-6 md:gap-8 w-full">
+        <div onclick="showSubCategories('ruka')" class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl p-6 sm:p-8 md:p-10 text-center cursor-pointer transform transition-all duration-300 hover:-translate-y-2 border border-slate-100 hover:border-slate-300 flex flex-col items-center justify-center">
+          <div class="w-16 h-16 md:w-20 md:h-20 bg-slate-50 group-hover:bg-slate-900 transition-colors duration-300 rounded-2xl flex items-center justify-center mb-5 md:mb-6 text-slate-700 group-hover:text-white rotate-3 group-hover:rotate-0">
+            <i data-lucide="hand" class="w-8 h-8 md:w-10 md:h-10"></i>
           </div>
-          <h3 class="font-bold text-lg md:text-xl text-dark">Ruka</h3>
+          <h3 class="font-bold text-xl md:text-2xl text-slate-900 group-hover:text-slate-700 transition-colors duration-300">Ruka</h3>
         </div>
-        <!-- Rame -->
-        <div onclick="showSubCategories('rame')" class="bg-white rounded-2xl md:rounded-3xl shadow-xl p-4 sm:p-6 md:p-8 text-center cursor-pointer hover:-translate-y-2 hover:shadow-2xl transition border-2 border-transparent hover:border-primary flex flex-col items-center justify-center">
-          <div class="w-12 h-12 md:w-16 md:h-16 bg-gray-100 rounded-full flex items-center justify-center mb-3 md:mb-4 text-dark">
-            <i data-lucide="activity" class="w-6 h-6 md:w-8 md:h-8"></i>
+        <div onclick="showSubCategories('grudi')" class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl p-6 sm:p-8 md:p-10 text-center cursor-pointer transform transition-all duration-300 hover:-translate-y-2 border border-slate-100 hover:border-slate-300 flex flex-col items-center justify-center">
+          <div class="w-16 h-16 md:w-20 md:h-20 bg-slate-50 group-hover:bg-slate-900 transition-colors duration-300 rounded-2xl flex items-center justify-center mb-5 md:mb-6 text-slate-700 group-hover:text-white -rotate-[3deg] group-hover:rotate-0">
+          <i data-lucide="user-round" class="w-8 h-8 md:w-10 md:h-10"></i>
           </div>
-          <h3 class="font-bold text-lg md:text-xl text-dark">Rame</h3>
-        </div>
-        <!-- Noge -->
-        <div onclick="showSubCategories('noge')" class="bg-white rounded-2xl md:rounded-3xl shadow-xl p-4 sm:p-6 md:p-8 text-center cursor-pointer hover:-translate-y-2 hover:shadow-2xl transition border-2 border-transparent hover:border-primary flex flex-col items-center justify-center">
-          <div class="w-12 h-12 md:w-16 md:h-16 bg-gray-100 rounded-full flex items-center justify-center mb-3 md:mb-4 text-dark">
-            <i data-lucide="footprints" class="w-6 h-6 md:w-8 md:h-8"></i>
-          </div>
-          <h3 class="font-bold text-lg md:text-xl text-dark">Noge</h3>
-        </div>
-        <!-- Koleno -->
-        <div onclick="showSubCategories('koleno')" class="bg-white rounded-2xl md:rounded-3xl shadow-xl p-4 sm:p-6 md:p-8 text-center cursor-pointer hover:-translate-y-2 hover:shadow-2xl transition border-2 border-transparent hover:border-primary flex flex-col items-center justify-center">
-          <div class="w-12 h-12 md:w-16 md:h-16 bg-gray-100 rounded-full flex items-center justify-center mb-3 md:mb-4 text-dark">
-            <i data-lucide="circle-dashed" class="w-6 h-6 md:w-8 md:h-8"></i>
-          </div>
-          <h3 class="font-bold text-lg md:text-xl text-dark">Koleno</h3>
-        </div>
-        <!-- Vrat -->
-        <div onclick="showSubCategories('vrat')" class="bg-white rounded-2xl md:rounded-3xl shadow-xl p-4 sm:p-6 md:p-8 text-center cursor-pointer hover:-translate-y-2 hover:shadow-2xl transition border-2 border-transparent hover:border-primary flex flex-col items-center justify-center">
-          <div class="w-12 h-12 md:w-16 md:h-16 bg-gray-100 rounded-full flex items-center justify-center mb-3 md:mb-4 text-dark">
-            <i data-lucide="user" class="w-6 h-6 md:w-8 md:h-8"></i>
-          </div>
-          <h3 class="font-bold text-lg md:text-xl text-dark">Vrat</h3>
-        </div>
-        <!-- Glava -->
-        <div onclick="showSubCategories('glava')" class="bg-white rounded-2xl md:rounded-3xl shadow-xl p-4 sm:p-6 md:p-8 text-center cursor-pointer hover:-translate-y-2 hover:shadow-2xl transition border-2 border-transparent hover:border-primary flex flex-col items-center justify-center">
-          <div class="w-12 h-12 md:w-16 md:h-16 bg-gray-100 rounded-full flex items-center justify-center mb-3 md:mb-4 text-dark">
-            <i data-lucide="smile" class="w-6 h-6 md:w-8 md:h-8"></i>
-          </div>
-          <h3 class="font-bold text-lg md:text-xl text-dark">Glava</h3>
+          <h3 class="font-bold text-xl md:text-2xl text-slate-900 group-hover:text-slate-700 transition-colors duration-300">Grudi</h3>
         </div>
       </div>
     </div>
 
-    <!-- Prikaz svih programa za odabranu kategoriju -->
-    <div id="step-2-subcategories" class="hidden w-full text-center mb-8">
-      <button onclick="backToCategories()" class="mb-6 md:mb-8 flex items-center justify-center gap-2 mx-auto text-gray-500 hover:text-dark font-semibold transition text-sm md:text-base">
-        <i data-lucide="arrow-left" class="w-4 h-4 md:w-5 md:h-5"></i> Nazad na izbor tela
+    <div id="step-2-subcategories" class="hidden w-full text-center mb-10">
+      <button onclick="backToCategories()" class="mb-8 md:mb-10 flex items-center justify-center gap-2 mx-auto text-slate-500 hover:text-slate-900 font-medium transition-colors duration-300 text-sm md:text-base group">
+        <i data-lucide="arrow-left" class="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300"></i> Nazad na izbor tela
       </button>
       
       <div id="subcat-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 justify-center w-full">
-        <!-- Kartice se ubacuju iz JavaScripta -->
-      </div>
+        </div>
     </div>
 
-    <!-- Imam kod dugme postavljeno nezavisno od kategorija tako da se uvek vidi -->
-    <div class="flex justify-center mt-8 md:mt-12 w-full" id="imam-kod-container">
-      <button onclick="openAccessModal()" class="bg-dark text-white px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-base md:text-lg hover:bg-gray-800 transition shadow-lg flex items-center justify-center gap-2 w-full sm:w-auto">
-        <i data-lucide="lock" class="w-5 h-5"></i> Imam kod
+    <div class="flex justify-center mt-10 md:mt-16 w-full" id="imam-kod-container">
+      <button onclick="openAccessModal()" class="group bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold text-base md:text-lg hover:bg-slate-800 transition-all duration-300 shadow-xl hover:shadow-2xl flex items-center justify-center gap-3 w-full sm:w-auto focus:ring-4 focus:ring-slate-200">
+        <i data-lucide="lock" class="w-5 h-5 group-hover:scale-110 transition-transform duration-300"></i> Imam kod
       </button>
     </div>
 
@@ -264,7 +232,7 @@
       <div class="absolute top-0 right-0 w-48 h-48 md:w-64 md:h-64 bg-primary opacity-10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
       <h2 class="text-3xl md:text-4xl font-bold text-dark mb-8 md:mb-12 text-center relative z-10">Kontaktirajte me</h2>
       
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 relative z-10">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 relative z-10">
         <a href="mailto:kontakt@sinapis.rs" class="flex flex-col items-center gap-3 md:gap-4 group">
           <div class="w-14 h-14 md:w-16 md:h-16 bg-gray-50 rounded-full flex items-center justify-center group-hover:bg-primary transition duration-300 shadow">
             <i data-lucide="mail" class="w-6 h-6 md:w-8 md:h-8 text-dark"></i>
@@ -281,6 +249,15 @@
           <div class="text-center">
             <h3 class="font-bold text-lg md:text-xl mb-1">Instagram</h3>
             <p class="text-gray-600 font-medium text-sm md:text-base">@certicivan</p>
+          </div>
+        </a>
+        <a href="https://facebook.com/certic.ivan" target="_blank" class="flex flex-col items-center gap-3 md:gap-4 group">
+          <div class="w-14 h-14 md:w-16 md:h-16 bg-gray-50 rounded-full flex items-center justify-center group-hover:bg-primary transition duration-300 shadow">
+            <i data-lucide="facebook" class="w-6 h-6 md:w-8 md:h-8"></i>
+          </div>
+          <div class="text-center">
+            <h3 class="font-bold text-lg md:text-xl mb-1">Facebook</h3>
+            <p class="text-gray-600 font-medium text-sm md:text-base">@certic.ivan</p>
           </div>
         </a>
         <a href="https://tiktok.com/@certicivan" target="_blank" class="flex flex-col items-center gap-3 md:gap-4 group sm:col-span-2 md:col-span-1">
@@ -316,6 +293,7 @@
         <i data-lucide="mail" class="w-5 h-5 md:w-6 md:h-6"></i>
       </a>
     </div>
+    <button type="button" onclick="openModal('privacyModal')" class="text-primary underline hover:text-yellow-600">Politika Privatnosti</button> | <button type="button" onclick="openModal('refundModal')" class="text-primary underline hover:text-yellow-600">Refund Policy</button>
     <p class="text-gray-500 text-xs md:text-sm mb-1">&copy; Sva prava zadržana 2026.</p>
     <p class="text-gray-500 text-xs md:text-sm">Napravio <a href="https://milanwebportal.com" class="hover:text-white transition">milanwebportal.com</a></p>
 
@@ -420,7 +398,7 @@
         <i data-lucide="x" class="w-5 h-5 md:w-6 md:h-6"></i>
       </button>
       <h3 class="text-xl md:text-2xl font-bold text-dark mb-2 mt-4 md:mt-0 pr-8">Instrukcije za plaćanje</h3>
-      <p class="text-gray-600 mb-4 md:mb-6 font-medium text-xs md:text-sm">Uspešno poslato. Molimo vas da izvršite uplatu prema dole navedenom primeru ili putem PayPal-a.</p>
+      <p class="text-gray-600 mb-4 md:mb-6 font-medium text-xs md:text-sm">Uspešno poslato. Molimo vas da izvršite uplatu prema dole navedenom primeru ili putem PayPal-a. Sačuvajte uplatnicu.</p>
 
       <!-- Vizuelna Uplatnica -->
       <div class="uplatnica-bg p-3 sm:p-4 md:p-6 mb-5 md:mb-6 shadow-sm overflow-x-auto">
@@ -450,19 +428,19 @@
               </div>
               <div class="w-1/4">
                 <div class="text-[10px] md:text-xs text-red-600 font-sans font-bold uppercase mb-1">Valuta</div>
-                <div class="uplatnica-linija pb-1 text-center font-semibold">EUR</div>
+                <div class="uplatnica-linija pb-1 text-center font-semibold">RSD</div>
               </div>
               <div class="w-1/2">
                 <div class="text-[10px] md:text-xs text-red-600 font-sans font-bold uppercase mb-1">Iznos</div>
-                <div class="uplatnica-linija pb-1 text-right font-bold text-sm md:text-lg">8.99</div>
+                <div class="uplatnica-linija pb-1 text-right font-bold text-sm md:text-lg">1199.90</div>
               </div>
             </div>
             <div>
               <div class="text-[10px] md:text-xs text-red-600 font-sans font-bold uppercase mb-1">Račun primaoca</div>
-              <div class="uplatnica-linija pb-1 font-bold tracking-wider text-[11px] sm:text-sm">160-1234567890123-45</div>
+              <div class="uplatnica-linija pb-1 font-bold tracking-wider text-[11px] sm:text-sm">265-7196570-72</div>
             </div>
             <div>
-              <div class="text-[10px] md:text-xs text-red-600 font-sans font-bold uppercase mb-1">Poziv na broj (Vaš telefon)</div>
+              <div class="text-[10px] md:text-xs text-red-600 font-sans font-bold uppercase mb-1">Poziv na broj</div>
               <div class="uplatnica-linija pb-1 font-semibold truncate" id="uplPoziv">060000000</div>
             </div>
           </div>
@@ -523,227 +501,20 @@
   <div id="videoModal" class="fixed inset-0 z-50 flex items-center justify-center modal-hidden">
     <div class="absolute inset-0 bg-dark opacity-95" onclick="closeVideo()"></div>
     <div class="w-full max-w-4xl mx-4 relative z-10">
-      <button onclick="closeVideo()" class="absolute -top-10 right-0 text-white flex items-center gap-2 font-bold z-30">Zatvori <i data-lucide="x-circle"></i></button>
+      <button onclick="closeVideo()" class="absolute -top-10 right-0 text-white flex items-center gap-2 font-bold z-30">
+        Zatvori <i data-lucide="x-circle"></i>
+      </button>
       <div class="bg-black rounded-2xl overflow-hidden aspect-video shadow-2xl relative">
-        <iframe id="mainVideoFrame" src="" class="w-full h-full relative z-10" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        
+        <div style="position: absolute; top: 0; right: 0; width: 80px; height: 80px; z-index: 20; background: transparent;"></div>
+        
+        <iframe id="mainVideoFrame" src="" class="w-full h-full relative z-10" frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen></iframe>
       </div>
     </div>
   </div>
 
-<script>
-  // 1. INICIJALIZACIJA
-    const supabaseUrl = 'https://evmfeikwgxhuewzmlrau.supabase.co';
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV2bWZlaWt3Z3hodWV3em1scmF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NDI3MjEsImV4cCI6MjA4NzUxODcyMX0.pBI7AU4xMUP2LpBfpu5tEW2zzYkaG-rLe596mJrtya4';
-    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-
-    lucide.createIcons();
-
-    const videoParams = "?modestbranding=1&rel=0&showinfo=0&controls=1&iv_load_policy=3";
-    let selectedProgramName = '';
-
-    const programsData = {
-      'ruka': [
-        { id: 'r1', name: 'Bol u ruci prednji deo', videoUrl: 'https://player.cloudinary.com/embed/?cloud_name=sinapiss&public_id=test&player[showLogo]=false&player[floatingWhenNotVisible]=false&player[showJumpControls]=false', img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80', desc: 'Detaljan video vodič za opuštanje mišića ruke.' },
-        { id: 'r2', name: 'Bol u ruci zadnji deo', videoUrl: 'https://www.youtube.com/embed/5kMUKC4KEfw' + videoParams, img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80', desc: 'Vežbe ciljane za zadnji deo ruke i lakta.' }
-      ],
-      'rame': [
-        { id: 'rm1', name: 'Zglob ramena i rotatori', videoUrl: 'https://www.youtube.com/embed/FIQHhkxmurQ' + videoParams, img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80', desc: 'Vratite pun obim pokreta u zglobu ramena.' }
-      ],
-      'noge': [
-        { id: 'n1', name: 'Oslobađanje išijadičnog nerva', videoUrl: 'https://www.youtube.com/embed/zjQgwAm38c0' + videoParams, img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80', desc: 'Smirite upalu nerva kroz pažljivo odabrane pokrete.' }
-      ],
-      'koleno': [
-        { id: 'k1', name: 'Bol u kolenu hrskavica', videoUrl: 'https://www.youtube.com/embed/mCu6wtNAzZg' + videoParams, img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80', desc: 'Ojačajte mišiće oko kolena za stabilan hod.' }
-      ],
-      'vrat': [
-        { id: 'v1', name: 'Vratni pršljenovi i držanje', videoUrl: 'https://www.youtube.com/embed/zzDf2aPmZFY' + videoParams, img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80', desc: 'Oslobodite se bola u gornjem delu tela i ispravite držanje.' }
-      ],
-      'glava': [
-        { id: 'g1', name: 'Tenzione glavobolje', videoUrl: 'https://www.youtube.com/embed/xHv1_48i5-A' + videoParams, img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80', desc: 'Smanjite tenzione glavobolje masažom tačaka.' }
-      ]
-    };
-
-    function showSubCategories(categoryId) {
-      document.getElementById('step-1-categories').classList.add('hidden');
-      const subContainer = document.getElementById('subcat-container');
-      subContainer.innerHTML = '';
-      if(programsData[categoryId]) {
-        programsData[categoryId].forEach(prog => {
-          const card = document.createElement('div');
-          card.className = 'bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden flex flex-col text-left';
-          card.innerHTML = `
-            <div class="relative h-48 bg-gray-200">
-              <img src="${prog.img}" alt="${prog.name}" class="w-full h-full object-cover">
-              <div class="absolute top-4 right-4 bg-primary text-dark font-bold px-3 py-1 rounded-full shadow text-sm">8.99 €</div>
-            </div>
-            <div class="p-6 flex flex-col flex-grow">
-              <h3 class="text-xl font-bold text-dark mb-2">${prog.name}</h3>
-              <p class="text-gray-600 mb-6 text-sm flex-grow">${prog.desc}</p>
-              <button onclick="openOrderForm('${prog.name}')" class="w-full bg-dark text-white font-bold py-3 rounded-xl hover:bg-gray-800 transition shadow mt-auto">Kupi program</button>
-            </div>
-          `;
-          subContainer.appendChild(card);
-        });
-      }
-      document.getElementById('step-2-subcategories').classList.remove('hidden');
-    }
-
-    function backToCategories() {
-      document.getElementById('step-2-subcategories').classList.add('hidden');
-      document.getElementById('step-1-categories').classList.remove('hidden');
-    }
-
-    function openModal(id) {
-      document.getElementById(id).classList.remove('modal-hidden');
-      document.getElementById(id).classList.add('modal-visible');
-    }
-
-    function closeModal(id) {
-      document.getElementById(id).classList.remove('modal-visible');
-      document.getElementById(id).classList.add('modal-hidden');
-    }
-
-    function openOrderForm(programName) {
-      selectedProgramName = programName;
-      document.getElementById('purchaseForm').reset();
-      openModal('orderFormModal');
-    }
-
-    function openAccessModal() { openModal('accessModal'); }
-
-    function generisiKod() {
-      const karakteri = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-      let rezultat = '';
-      for (let i = 0; i < 6; i++) { rezultat += karakteri.charAt(Math.floor(Math.random() * karakteri.length)); }
-      return rezultat;
-    }
-
-    async function handleFormSubmit(e) {
-      e.preventDefault();
-      const btn = document.getElementById('submitBtn');
-      btn.innerText = "Slanje...";
-      btn.disabled = true;
-
-      const ime = document.getElementById('buyerFirstName').value.trim();
-      const prezime = document.getElementById('buyerLastName').value.trim();
-      const email = document.getElementById('buyerEmail').value.trim();
-      const telefon = document.getElementById('buyerPhone').value.trim();
-      const punoIme = ime + " " + prezime;
-
-      const noviKod = generisiKod();
-
-      const { error } = await supabaseClient
-        .from('pristupi')
-        .insert([{ 
-          kod: noviKod, 
-          ime_prezime: punoIme, 
-          telefon: telefon,
-          program_ime: selectedProgramName 
-        }]);
-
-      if (error) {
-        console.error(error);
-        alert("Greska sa bazom. Proveri RLS polise.");
-        btn.disabled = false;
-        btn.innerText = "Potvrdi i prikaži uplatnicu";
-        return;
-      }
-
-      document.getElementById('uplIme').innerText = punoIme;
-      document.getElementById('uplSvrha').innerText = "Program: " + selectedProgramName;
-      document.getElementById('uplPoziv').innerText = noviKod;
-
-      // Generisanje teksta za automatski odgovor kupcu
-      const autoReplyMessage = `Poštovani/a ${punoIme},\n\nPrimili smo Vašu online prijavu za program vežbi.\n\nUpravo ste se prijavili za: ${selectedProgramName}\nCena: 8.99 €\n\nPodaci za uplatu:\nPrimalac: Sinapis, Beograd\nRačun: 160-123456789-45\nPoziv na broj: ${noviKod}\n\nVaša rezervacija važi 7 dana. Odmah nakon uplate, pošaljite potvrdu na naš Instagram profil radi aktivacije koda.\n\nVaš Sinapis tim`;
-
-      fetch("https://formsubmit.co/ajax/tvoj_email@gmail.com", {
-          method: "POST",
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({ 
-              Ime: punoIme, 
-              email: email, 
-              Telefon: telefon,
-              Program: selectedProgramName, 
-              Kod: noviKod,
-              _autoresponse: autoReplyMessage,
-              _subject: "Nova narudžbina: " + noviKod
-          })
-      }).finally(() => {
-          btn.innerText = "Potvrdi i prikaži uplatnicu";
-          btn.disabled = false;
-          closeModal('orderFormModal');
-          openModal('paymentModal');
-      });
-    }
-
-    async function verifyCode() {
-      const codeInput = document.getElementById('videoCodeInput').value.trim().toUpperCase();
-      const errorBox = document.getElementById('errorMessage');
-      if (!codeInput) { errorBox.innerText = 'Unesite kod'; return; }
-
-      errorBox.innerText = 'Proveravam...';
-
-      try {
-        const { data, error } = await supabaseClient
-          .from('pristupi')
-          .select('*')
-          .eq('kod', codeInput)
-          .maybeSingle();
-
-        if (error) {
-          console.error("Greska sa bazom:", error);
-          errorBox.innerText = 'Greška pri povezivanju sa bazom.';
-          return;
-        }
-
-        if (!data) { errorBox.innerText = 'Kod ne postoji.'; return; }
-        if (!data.aktivan) { errorBox.innerText = 'Kod još nije aktiviran.'; return; }
-        
-        const sada = new Date();
-        const istice = new Date(data.vazi_do);
-        if (sada > istice) { errorBox.innerText = 'Kod je istekao.'; return; }
-
-        let foundVideo = '';
-        for (const cat in programsData) {
-          const prog = programsData[cat].find(p => p.name === data.program_ime);
-          if (prog) { foundVideo = prog.videoUrl; break; }
-        }
-
-        if (foundVideo) {
-          const videoFrame = document.getElementById('mainVideoFrame');
-          if (videoFrame) {
-              videoFrame.src = foundVideo;
-              errorBox.innerText = '';
-              closeModal('accessModal');
-              openModal('videoModal');
-          } else {
-              errorBox.innerText = 'Sistemska greška: Plejer nije spreman.';
-          }
-        } else {
-          errorBox.innerText = 'Video nije pronadjen.';
-        }
-      } catch (err) {
-        errorBox.innerText = 'Tačna greška: ' + err.message;
-      }
-    }
-
-    function closeVideo() {
-      const videoFrame = document.getElementById('mainVideoFrame');
-      if (videoFrame) videoFrame.src = '';
-      closeModal('videoModal');
-    }
-
-    const backToTopBtn = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) {
-            backToTopBtn.classList.replace('opacity-0', 'opacity-100');
-            backToTopBtn.classList.replace('pointer-events-none', 'pointer-events-auto');
-        } else {
-            backToTopBtn.classList.replace('opacity-100', 'opacity-0');
-            backToTopBtn.classList.replace('pointer-events-auto', 'pointer-events-none');
-        }
-    });
-    backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-</script>
 </body>
 </html>
+<script src="main.js"></script>
