@@ -5,7 +5,10 @@
     lucide.createIcons();
 
     let selectedProgramName = '';
-    let userPrice = "1099 RSD";
+
+    let userPrice = "1099.90 RSD";
+    let uplatnicaIznos = "1099.90";
+    let uplatnicaValuta = "RSD";
 
     async function setPriceByLocation() {
       try {
@@ -13,20 +16,30 @@
         const data = await response.json();
         if (data.country_code !== 'RS') {
           userPrice = "8.99 EUR";
+          uplatnicaIznos = "8.99";
+          uplatnicaValuta = "EUR";
         }
       } catch (error) {
         console.log("Lokacija nije pronađena");
       }
+
+      // Ažuriranje uplatnice ako elementi postoje
+      const prikazIznosa = document.getElementById('uplIznos');
+      const prikazValute = document.getElementById('uplValuta');
+      
+      if (prikazIznosa) prikazIznosa.innerText = uplatnicaIznos;
+      if (prikazValute) prikazValute.innerText = uplatnicaValuta;
     }
 
     setPriceByLocation();
+
     const programsData = {
       'ruka': [
-        { id: 'r1', name: 'Trnjenje ruke regija 1', videoUrl: 'https://drive.google.com/file/d/1z7FKFC1VlZiGEOYMoNNUOTLAdhms25hP/preview', img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80', desc: 'Detaljan video vodic za prevazilazenje tegobe trnjenja regije prikazane na slici.' },
-        { id: 'r2', name: 'Trnjenje ruke regija 2', videoUrl: 'https://drive.google.com/file/d/1Q6-PZ-sEfNJCI8EQ477KLxVbHROa6LTe/preview', img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80', desc: 'Detaljan video vodic za prevazilazenje tegobe trnjenja regije prikazane na slici.' }
+        { id: 'r1', name: 'Trnjenje ruke regija 1', videoUrl: 'https://drive.google.com/file/d/1z7FKFC1VlZiGEOYMoNNUOTLAdhms25hP/preview', img: 'images/regija1.png', desc: 'Detaljan video vodic za prevazilazenje tegobe trnjenja regije prikazane na slici.' },
+        { id: 'r2', name: 'Trnjenje ruke regija 2', videoUrl: 'https://drive.google.com/file/d/1Q6-PZ-sEfNJCI8EQ477KLxVbHROa6LTe/preview', img: 'images/regija2.png', desc: 'Detaljan video vodic za prevazilazenje tegobe trnjenja regije prikazane na slici.' }
       ],
       'grudi': [
-        { id: 'rm1', name: 'Bolovi u grudima / Interkostal', videoUrl: 'https://drive.google.com/file/d/10-bxGrdTIfDQMZGjJ0cWo5ukDbOTcdtj/preview', img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80', desc: 'Detaljan video vodic za prevazilazenje tegobe bolova u grudima.' }
+        { id: 'rm1', name: 'Bolovi u grudima / Interkostal', videoUrl: 'https://drive.google.com/file/d/10-bxGrdTIfDQMZGjJ0cWo5ukDbOTcdtj/preview', img: 'images/grudi1.png', desc: 'Detaljan video vodic za prevazilazenje tegobe bolova u grudima.' }
       ],
     };
 
@@ -47,7 +60,7 @@
       DOM.step1.classList.add('hidden');
       if (programsData[categoryId]) {
         DOM.subcatContainer.innerHTML = programsData[categoryId].map(prog => `
-          <div class="group bg-white rounded-2xl md:rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 overflow-hidden flex flex-col text-left">
+          <div class="group bg-white rounded-2xl md:rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden flex flex-col text-left">
           <div class="relative h-52 sm:h-56 bg-gray-100 overflow-hidden">
             <img src="${prog.img}" alt="${prog.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out">
             <div class="absolute top-4 right-4 bg-primary text-dark font-bold px-4 py-1.5 rounded-full shadow-md text-sm tracking-wide z-10">${userPrice}</div>
@@ -181,3 +194,21 @@
     });
     
     DOM.backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    function preuzmiUplatnicu() {
+      const element = document.getElementById('uplatnicaElement');
+      
+      html2canvas(element, {
+        scale: 2,
+        backgroundColor: "#ffffff",
+        useCORS: true,
+        scrollY: -window.scrollY
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'Uplatnica.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      }).catch(err => {
+        console.log("Greška pri skidanju slike", err);
+      });
+    }

@@ -1,0 +1,50 @@
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 7px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #dfe2e3;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #fdce0f;
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #e5b90d;
+  }
+    body {
+      background-color: #dfe2e3;
+      scroll-behavior: smooth;
+    }
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    .modal-hidden {
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+    .modal-visible {
+      opacity: 1;
+      pointer-events: auto;
+      transition: all 0.3s ease;
+    }
+    .uplatnica-bg {
+      background-color: #fffdfd;
+      border: 1px solid #dc2626;
+    }
+    .uplatnica-linija {
+      border-bottom: 1px solid #fca5a5;
+    }
+    /* Sklanja strelice kod input type="number" */
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
