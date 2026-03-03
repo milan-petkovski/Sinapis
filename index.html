@@ -450,7 +450,7 @@
       </div>
 
       <div id="uplatnicaElement" class="bg-[#fcfaf5] border-2 border-gray-200 p-5 md:p-6 mb-4 rounded-xl shadow-sm overflow-hidden relative">
-        <div class="text-red-700 font-bold border-b-2 border-red-200 pb-2 mb-4 text-sm md:text-lg tracking-widest">NALOG ZA UPLATU</div>
+        <div class="text-red-700 font-bold border-b-2 border-red-200 pb-2 mb-4 text-sm md:text-lg tracking-widest">UPLATNICA</div>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 font-mono text-xs sm:text-sm text-dark">
           <div class="space-y-4">
@@ -547,6 +547,7 @@
       </p>
 
       <input type="text" id="videoCodeInput" placeholder="Vaš kod" 
+        onkeypress="if(event.key === 'Enter') verifyCode()"
         class="w-full bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3 mb-2 text-center font-mono font-bold text-base md:text-lg focus:border-primary focus:bg-white focus:outline-none transition-all uppercase">
 
       <div id="errorMessage" class="text-red-500 text-xs md:text-sm font-semibold h-6 mb-4 flex items-center justify-center"></div>
@@ -560,7 +561,7 @@
 
   <!-- Modal za Video -->
   <div id="videoModal" class="fixed inset-0 z-50 flex items-center justify-center modal-hidden transition-all duration-300">
-  <div class="absolute inset-0 bg-dark/95 backdrop-blur-md" onclick="closeVideo()"></div>
+  <div class="absolute inset-0 bg-dark/95 backdrop-blur-md"></div>
   
   <div class="w-full max-w-4xl mx-4 relative z-10">
     <div class="flex justify-between items-end mb-4">

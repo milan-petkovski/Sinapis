@@ -51,25 +51,30 @@ const DOM = {
 
 async function setPriceByLocation() {
   try {
-    const response = await fetch('https://ipapi.co/json/');
-    if (!response.ok) throw new Error("API nedostupan");
+    const response = await fetch('https://ipwho.is/');
     const data = await response.json();
     
-    if (data.country_code !== 'RS') {
-      userPrice = "8.99 EUR";
-      uplatnicaIznos = "8.99";
-      uplatnicaValuta = "EUR";
+    if (data && data.success) {
+      if (data.country_code !== 'RS') {
+        userPrice = "8.99 EUR";
+        uplatnicaIznos = "8.99";
+        uplatnicaValuta = "EUR";
+      } else {
+        userPrice = "1099.90 RSD";
+        uplatnicaIznos = "1099.90";
+        uplatnicaValuta = "RSD";
+      }
+      console.log(`Lokacija prepoznata: ${data.country_code}. Valuta: ${uplatnicaValuta}`);
     }
   } catch (error) {
-    console.warn("Lokacija nije pronađena. Postavljeno na RSD.");
-    userPrice = "1099.90 RSD";
-    uplatnicaIznos = "1099.90";
-    uplatnicaValuta = "RSD";
+    console.warn("Greška pri prepoznavanju lokacije, koristim RSD kao fallback.");
   }
 
+  // Ažuriraj elemente na uplatnici ako su učitani
   if (DOM.uplIznos) DOM.uplIznos.innerText = uplatnicaIznos;
   if (DOM.uplValuta) DOM.uplValuta.innerText = uplatnicaValuta;
 }
+
 setPriceByLocation();
 
 function showSubCategories(categoryId) {
@@ -155,7 +160,7 @@ async function handleFormSubmit(e) {
   }
 
   DOM.uplIme.innerText = punoIme;
-  DOM.uplSvrha.innerText = `Program: ${selectedProgramName}`;
+  DOM.uplSvrha.innerText = `${selectedProgramName}`;
   DOM.uplPoziv.innerText = noviKod;
 
   fetch("https://formsubmit.co/ajax/prodaja@sinapis.rs", {
