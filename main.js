@@ -158,7 +158,7 @@ async function handleFormSubmit(e) {
   DOM.uplSvrha.innerText = `Program: ${selectedProgramName}`;
   DOM.uplPoziv.innerText = noviKod;
 
-  fetch("https://formsubmit.co/ajax/kontakt@sinapis.rs", {
+  fetch("https://formsubmit.co/ajax/prodaja@sinapis.rs", {
       method: "POST",
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({ Ime: punoIme, email, Telefon: telefon, Program: selectedProgramName, Kod: noviKod, _subject: `Nova narudžbina: ${noviKod}` })
