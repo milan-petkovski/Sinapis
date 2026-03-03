@@ -51,26 +51,36 @@ const DOM = {
 
 async function setPriceByLocation() {
   try {
-    const response = await fetch('https://ipwho.is/');
-    const data = await response.json();
+    // Cloudflare trace je najbrži i najpouzdaniji za proveru lokacije
+    const response = await fetch('https://www.cloudflare.com/cdn-cgi/trace');
+    const text = await response.text();
     
-    if (data && data.success) {
-      if (data.country_code !== 'RS') {
-        userPrice = "8.99 EUR";
-        uplatnicaIznos = "8.99";
-        uplatnicaValuta = "EUR";
-      } else {
-        userPrice = "1099.90 RSD";
-        uplatnicaIznos = "1099.90";
-        uplatnicaValuta = "RSD";
-      }
-      console.log(`Lokacija prepoznata: ${data.country_code}. Valuta: ${uplatnicaValuta}`);
+    // Cloudflare vraća tekst, pa moramo da izvučemo country kod (npr. loc=RS)
+    const data = text.split('\n').reduce((obj, line) => {
+      const [key, value] = line.split('=');
+      obj[key] = value;
+      return obj;
+    }, {});
+
+    const countryCode = data.loc; // 'RS', 'NL', 'US' itd.
+
+    if (countryCode && countryCode !== 'RS') {
+      userPrice = "8.99 EUR";
+      uplatnicaIznos = "8.99";
+      uplatnicaValuta = "EUR";
+    } else {
+      userPrice = "1099.90 RSD";
+      uplatnicaIznos = "1099.90";
+      uplatnicaValuta = "RSD";
     }
+    
+    console.log(`Zemlja: ${countryCode}. Valuta: ${uplatnicaValuta}`);
+
   } catch (error) {
-    console.warn("Greška pri prepoznavanju lokacije, koristim RSD kao fallback.");
+    console.warn("Greška pri proveri lokacije, ostaje RSD.");
+    // Već su definisane RSD vrednosti na početku, pa ne moramo ništa ovde
   }
 
-  // Ažuriraj elemente na uplatnici ako su učitani
   if (DOM.uplIznos) DOM.uplIznos.innerText = uplatnicaIznos;
   if (DOM.uplValuta) DOM.uplValuta.innerText = uplatnicaValuta;
 }
