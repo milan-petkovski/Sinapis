@@ -50,42 +50,44 @@ const DOM = {
 };
 
 async function setPriceByLocation() {
+  // Podrazumevane vrednosti su uvek RSD (Srbija)
+  let detectedCountry = 'RS';
+
   try {
-    // Cloudflare trace je najbrži i najpouzdaniji za proveru lokacije
-    const response = await fetch('https://www.cloudflare.com/cdn-cgi/trace');
-    const text = await response.text();
+    const response = await fetch('https://www.cloudflare.com/cdn-cgi/trace', {
+      mode: 'cors',
+      cache: 'no-cache'
+    });
     
-    // Cloudflare vraća tekst, pa moramo da izvučemo country kod (npr. loc=RS)
-    const data = text.split('\n').reduce((obj, line) => {
-      const [key, value] = line.split('=');
-      obj[key] = value;
-      return obj;
-    }, {});
-
-    const countryCode = data.loc; // 'RS', 'NL', 'US' itd.
-
-    if (countryCode && countryCode !== 'RS') {
-      userPrice = "8.99 EUR";
-      uplatnicaIznos = "8.99";
-      uplatnicaValuta = "EUR";
-    } else {
-      userPrice = "1099.90 RSD";
-      uplatnicaIznos = "1099.90";
-      uplatnicaValuta = "RSD";
+    if (response.ok) {
+      const text = await response.text();
+      const data = text.split('\n').reduce((obj, line) => {
+        const [key, value] = line.split('=');
+        if (key) obj[key.trim()] = value ? value.trim() : '';
+        return obj;
+      }, {});
+      
+      detectedCountry = data.loc || 'RS';
     }
-    
-    console.log(`Zemlja: ${countryCode}. Valuta: ${uplatnicaValuta}`);
-
-  } catch (error) {
-    console.warn("Greška pri proveri lokacije, ostaje RSD.");
-    // Već su definisane RSD vrednosti na početku, pa ne moramo ništa ovde
+  } catch (e) {
+    // Ako AdBlock blokira, ostaje RS
   }
 
+  // Logika za valutu na osnovu detekcije
+  if (detectedCountry !== 'RS') {
+    userPrice = "8.99 EUR";
+    uplatnicaIznos = "8.99";
+    uplatnicaValuta = "EUR";
+  } else {
+    userPrice = "1099.90 RSD";
+    uplatnicaIznos = "1099.90";
+    uplatnicaValuta = "RSD";
+  }
+
+  // Ažuriranje UI elemenata
   if (DOM.uplIznos) DOM.uplIznos.innerText = uplatnicaIznos;
   if (DOM.uplValuta) DOM.uplValuta.innerText = uplatnicaValuta;
 }
-
-setPriceByLocation();
 
 function showSubCategories(categoryId) {
   DOM.step1.classList.add('hidden');
