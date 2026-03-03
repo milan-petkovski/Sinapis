@@ -51,18 +51,16 @@ const DOM = {
 
 async function setPriceByLocation() {
   try {
-    // Cloudflare trace je najbrži i najpouzdaniji za proveru lokacije
     const response = await fetch('https://www.cloudflare.com/cdn-cgi/trace');
     const text = await response.text();
-    
-    // Cloudflare vraća tekst, pa moramo da izvučemo country kod (npr. loc=RS)
+
     const data = text.split('\n').reduce((obj, line) => {
       const [key, value] = line.split('=');
       obj[key] = value;
       return obj;
     }, {});
 
-    const countryCode = data.loc; // 'RS', 'NL', 'US' itd.
+    const countryCode = data.loc;
 
     if (countryCode && countryCode !== 'RS') {
       userPrice = "8.99 EUR";
@@ -78,7 +76,6 @@ async function setPriceByLocation() {
 
   } catch (error) {
     console.warn("Greška pri proveri lokacije, ostaje RSD.");
-    // Već su definisane RSD vrednosti na početku, pa ne moramo ništa ovde
   }
 
   if (DOM.uplIznos) DOM.uplIznos.innerText = uplatnicaIznos;
