@@ -80,52 +80,57 @@
   </nav>
 
   <!-- Hero Sekcija -->
-  <section id="pocetna" class="relative pt-32 md:pt-40 overflow-hidden">
-    
-    <div class="absolute top-40 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl -z-10"></div>
+  <section id="pocetna" class="relative min-h-screen overflow-hidden w-full flex flex-col pt-24">
+      
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl -z-10"></div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16 md:mb-24">
-      <div class="max-w-4xl mx-auto space-y-8">
-        <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-dark leading-[1.1]">
-          Oslobodi se bola i vrati 
-          <br class="hidden md:block">
-          <span class="text-primary bg-dark px-4 py-2 rounded-2xl inline-block mt-4 transform -rotate-1 shadow-lg">
-            pokretljivost
-          </span>
-        </h1>
+      <div class="flex-1 flex flex-col items-center justify-center w-full px-4 sm:px-6 lg:px-8 text-center py-12">
+        <div class="max-w-5xl w-full space-y-8 flex flex-col items-center">
+          
+          <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-dark leading-[1.1] w-full">
+            Oslobodi se bola i vrati 
+            <br class="hidden md:block">
+            <span class="text-primary bg-dark px-6 py-2 rounded-2xl inline-block mt-4 transform -rotate-1 shadow-lg">
+              pokretljivost
+            </span>
+          </h1>
 
-        <p class="text-lg md:text-2xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-          Specijalizovani programi i vežbe za oporavak svakodnevnih povreda, bez trenera/terapeuta. 
-        </p>
+          <p class="text-lg md:text-2xl text-gray-600 max-w-2xl leading-relaxed">
+            Specijalizovani programi i vežbe za oporavak svakodnevnih povreda, bez trenera/terapeuta. 
+          </p>
 
-        <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
-          <a href="#programi" class="w-full sm:w-auto bg-primary text-dark px-10 py-5 rounded-full font-bold text-xl hover:bg-yellow-400 transition-all hover:scale-105 shadow-2xl active:scale-95 text-center flex items-center justify-center gap-2">
-            <i data-lucide="search" class="w-5 h-5"></i> Pogledaj programe
-          </a>      
-          <button onclick="openAccessModal()" class="w-full sm:w-auto bg-dark text-white px-10 py-5 rounded-full font-bold text-xl hover:bg-gray-800 transition shadow-lg flex items-center justify-center gap-2">
-            <i data-lucide="unlock" class="w-5 h-5"></i> Imam kod
-          </button>
+          <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4 w-full">
+            <a href="#programi" class="w-full sm:w-auto bg-primary text-dark px-10 py-5 rounded-full font-bold text-xl hover:bg-yellow-400 transition-all hover:scale-105 shadow-2xl active:scale-95 text-center flex items-center justify-center gap-2">
+              <i data-lucide="search" class="w-5 h-5"></i> Pogledaj programe
+            </a>      
+            <button onclick="openAccessModal()" class="w-full sm:w-auto bg-dark text-white px-10 py-5 rounded-full font-bold text-xl hover:bg-gray-800 transition shadow-lg flex items-center justify-center gap-2">
+              <i data-lucide="unlock" class="w-5 h-5"></i> Imam kod
+            </button>
+          </div>
+
         </div>
       </div>
-    </div>
 
-    <div class="w-full bg-primary text-dark py-8 md:py-10 shadow-inner border-y border-dark/5">
-      <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-        <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6">
-          <div class="bg-dark text-primary p-3 rounded-full hidden sm:block">
-            <i data-lucide="help-circle" class="w-8 h-8"></i>
+      <div class="w-full bg-primary text-dark py-8 md:py-10 shadow-inner border-y border-dark/5 flex justify-center mt-auto">
+        <div class="w-full max-w-7xl px-4 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+          
+          <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6">
+            <div class="bg-dark text-primary p-3 rounded-full hidden sm:block">
+              <i data-lucide="help-circle" class="w-8 h-8"></i>
+            </div>
+            <div class="flex flex-col items-center md:items-start">
+              <h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight">Nisi siguran koji program ti je potreban?</h3>
+              <p class="font-bold mt-1 text-base md:text-lg opacity-80">Slobodno mi pošalji poruku za besplatnu konsultaciju.</p>
+            </div>
           </div>
-          <div>
-            <h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight">Nisi siguran koji program ti je potreban?</h3>
-            <p class="font-bold mt-1 text-base md:text-lg opacity-80">Slobodno mi pošalji poruku za besplatnu konsultaciju.</p>
-          </div>
+
+          <a href="https://ig.me/m/certicivan" target="_blank"
+            class="bg-dark text-white px-10 py-4 rounded-full font-black text-lg hover:bg-gray-800 transition-all hover:scale-105 shadow-xl whitespace-nowrap w-full md:w-auto text-center">
+            PIŠI MI NA INSTAGRAM
+          </a>
+
         </div>
-        <a href="https://ig.me/m/certicivan" target="_blank"
-          class="bg-dark text-white px-10 py-4 rounded-full font-black text-lg hover:bg-gray-800 transition-all hover:scale-105 shadow-xl whitespace-nowrap w-full md:w-auto">
-          PIŠI MI NA INSTAGRAM
-        </a>
       </div>
-    </div>
 
   </section>
 
@@ -516,13 +521,13 @@
       <div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-4 mb-6">
         <p class="text-sm text-yellow-800 font-medium flex items-start gap-3">
           <i data-lucide="info" class="w-5 h-5 flex-shrink-0 text-yellow-600 mt-0.5"></i>
-          Nakon uplate pošalji sliku uplatnice ili potvrdu o PayPal uplati u poruci na Instagram da bismo ti brže odobrili pristupni kod.
+          Nakon uplate pošalji sliku uplatnice ili potvrdu o PayPal uplati u poruci na Email kontakt@sinapis.rs da bismo ti brže odobrili pristupni kod.
         </p>
       </div>
 
-      <a href="https://ig.me/m/certicivan" target="_blank" class="flex items-center justify-center gap-2 w-full bg-primary text-dark font-extrabold py-4 rounded-2xl hover:bg-yellow-400 hover:scale-[1.02] transition-all shadow-xl shadow-primary/20">
-        <i data-lucide="instagram" class="w-5 h-5"></i>
-        Otvori Instagram
+      <a href="mailto:kontakt@sinapis.rs" class="flex items-center justify-center gap-2 w-full bg-primary text-dark font-extrabold py-4 rounded-2xl hover:bg-yellow-400 hover:scale-[1.02] transition-all shadow-xl shadow-primary/20">
+        <i data-lucide="mail" class="w-5 h-5"></i>
+        kontakt@sinapis.rs
       </a>
     </div>
   </div>
