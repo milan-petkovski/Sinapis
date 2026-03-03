@@ -50,41 +50,47 @@ const DOM = {
 };
 
 async function setPriceByLocation() {
-  // Podrazumevane vrednosti su uvek RSD (Srbija)
-  let detectedCountry = 'RS';
-
   try {
     const response = await fetch('https://www.cloudflare.com/cdn-cgi/trace', {
-      mode: 'cors',
-      cache: 'no-cache'
+      method: 'GET',
+      headers: {
+        'Content-Type': 'text/plain'
+      }
     });
+
+    if (!response.ok) throw new Error();
+
+    const text = await response.text();
     
-    if (response.ok) {
-      const text = await response.text();
-      const data = text.split('\n').reduce((obj, line) => {
-        const [key, value] = line.split('=');
-        if (key) obj[key.trim()] = value ? value.trim() : '';
-        return obj;
-      }, {});
-      
-      detectedCountry = data.loc || 'RS';
+    // Precizno izvlačenje country koda iz teksta
+    const lines = text.split('\n');
+    let countryCode = 'RS'; // Default
+
+    lines.forEach(line => {
+      if (line.startsWith('loc=')) {
+        countryCode = line.split('=')[1].trim();
+      }
+    });
+
+    console.log("Detektovana država:", countryCode);
+
+    // Ako država NIJE Srbija (RS), postavi evre
+    if (countryCode !== 'RS') {
+      userPrice = "8.99 EUR";
+      uplatnicaIznos = "8.99";
+      uplatnicaValuta = "EUR";
+    } else {
+      userPrice = "1099.90 RSD";
+      uplatnicaIznos = "1099.90";
+      uplatnicaValuta = "RSD";
     }
-  } catch (e) {
-    // Ako AdBlock blokira, ostaje RS
+
+  } catch (error) {
+    console.log("Sistem nije uspeo da očita lokaciju, ostaje RSD.");
+    // Vrednosti su već definisane kao RSD na vrhu fajla
   }
 
-  // Logika za valutu na osnovu detekcije
-  if (detectedCountry !== 'RS') {
-    userPrice = "8.99 EUR";
-    uplatnicaIznos = "8.99";
-    uplatnicaValuta = "EUR";
-  } else {
-    userPrice = "1099.90 RSD";
-    uplatnicaIznos = "1099.90";
-    uplatnicaValuta = "RSD";
-  }
-
-  // Ažuriranje UI elemenata
+  // Ažuriranje UI elemenata na uplatnici
   if (DOM.uplIznos) DOM.uplIznos.innerText = uplatnicaIznos;
   if (DOM.uplValuta) DOM.uplValuta.innerText = uplatnicaValuta;
 }
