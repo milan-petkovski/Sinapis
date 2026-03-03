@@ -51,31 +51,20 @@ const DOM = {
 
 async function setPriceByLocation() {
   try {
-    const response = await fetch('https://www.cloudflare.com/cdn-cgi/trace', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'text/plain'
-      }
-    });
-
-    if (!response.ok) throw new Error();
-
+    // Cloudflare trace je najbrži i najpouzdaniji za proveru lokacije
+    const response = await fetch('https://www.cloudflare.com/cdn-cgi/trace');
     const text = await response.text();
     
-    // Precizno izvlačenje country koda iz teksta
-    const lines = text.split('\n');
-    let countryCode = 'RS'; // Default
+    // Cloudflare vraća tekst, pa moramo da izvučemo country kod (npr. loc=RS)
+    const data = text.split('\n').reduce((obj, line) => {
+      const [key, value] = line.split('=');
+      obj[key] = value;
+      return obj;
+    }, {});
 
-    lines.forEach(line => {
-      if (line.startsWith('loc=')) {
-        countryCode = line.split('=')[1].trim();
-      }
-    });
+    const countryCode = data.loc; // 'RS', 'NL', 'US' itd.
 
-    console.log("Detektovana država:", countryCode);
-
-    // Ako država NIJE Srbija (RS), postavi evre
-    if (countryCode !== 'RS') {
+    if (countryCode && countryCode !== 'RS') {
       userPrice = "8.99 EUR";
       uplatnicaIznos = "8.99";
       uplatnicaValuta = "EUR";
@@ -84,16 +73,19 @@ async function setPriceByLocation() {
       uplatnicaIznos = "1099.90";
       uplatnicaValuta = "RSD";
     }
+    
+    console.log(`Zemlja: ${countryCode}. Valuta: ${uplatnicaValuta}`);
 
   } catch (error) {
-    console.log("Sistem nije uspeo da očita lokaciju, ostaje RSD.");
-    // Vrednosti su već definisane kao RSD na vrhu fajla
+    console.warn("Greška pri proveri lokacije, ostaje RSD.");
+    // Već su definisane RSD vrednosti na početku, pa ne moramo ništa ovde
   }
 
-  // Ažuriranje UI elemenata na uplatnici
   if (DOM.uplIznos) DOM.uplIznos.innerText = uplatnicaIznos;
   if (DOM.uplValuta) DOM.uplValuta.innerText = uplatnicaValuta;
 }
+
+setPriceByLocation();
 
 function showSubCategories(categoryId) {
   DOM.step1.classList.add('hidden');
