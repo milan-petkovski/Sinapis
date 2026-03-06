@@ -16,6 +16,9 @@ const programsData = {
   ],
   'grudi': [
     { id: 'rm1', name: 'Bolovi u grudima / Interkostal', videoUrl: 'https://drive.google.com/file/d/10-bxGrdTIfDQMZGjJ0cWo5ukDbOTcdtj/preview', img: 'images/grudi1.png', desc: 'Detaljan video vodic za prevazilazenje tegobe bolova u grudima.' }
+  ],
+  'ledja': [
+    { id: 'ldj1', name: 'Bolovi u donjim ledjima', videoUrl: 'https://drive.google.com/file/d/17u8fIC96SKeL106B9_SEzP3i3nmWBMj3/preview', img: 'images/ledja1.png', desc: 'Detaljan video vodic za prevazilazenje bola u donjim ledjima i bol koji se spusta niz nogu.' }
   ]
 };
 
